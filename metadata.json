@@ -1,0 +1,6 @@
+{
+  "name": "Botany Master - HSC & Medical MCQ Practice",
+  "description": "Comprehensive Botany MCQ practice platform featuring 12 chapters with sequential practice sets, answer validation, progress tracking, and bookmarks for HSC & Medical aspirants.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
