@@ -1,16 +1,17 @@
 import React from 'react';
 import { ViewMode } from '../types';
 import { 
-  Sprout, 
+  Atom, 
   LayoutDashboard, 
   BookOpen, 
   Layers, 
   Bookmark, 
   BarChart3, 
   Search,
-  CheckCircle2,
-  Menu,
-  X
+  CheckCircle2, 
+  Menu, 
+  X,
+  Sparkles
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -37,8 +38,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navItems: { id: ViewMode; label: string; icon: React.ReactNode; badge?: number }[] = [
     { id: 'dashboard', label: 'ড্যাশবোর্ড', icon: <LayoutDashboard className="w-4 h-4" /> },
-    { id: 'chapters', label: '১২টি অধ্যায়', icon: <BookOpen className="w-4 h-4" /> },
-    { id: 'sets', label: 'বোটানি MCQ সেটস', icon: <Layers className="w-4 h-4" /> },
+    { id: 'chapters', label: '১২টি অধ্যায় (Botany)', icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'sets', label: 'MCQ অনুশীলন সেটস', icon: <Layers className="w-4 h-4" /> },
     { 
       id: 'saved', 
       label: 'সেভ করা প্রশ্ন', 
@@ -49,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-xs">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
@@ -57,15 +58,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => onSelectView('dashboard')}
             className="flex items-center space-x-3 cursor-pointer group select-none"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-              <Sprout className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 via-sky-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
+              <Atom className="w-6 h-6 animate-[spin_12s_linear_infinite]" />
             </div>
             <div>
               <div className="flex items-center space-x-1.5">
-                <span className="font-extrabold text-lg text-slate-800 tracking-tight">Botany Master</span>
+                <span className="font-extrabold text-lg text-slate-800 tracking-tight">Science Master</span>
                 <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">HSC & Med</span>
               </div>
-              <p className="text-xs text-slate-500 font-medium">উদ্ভিদবিজ্ঞান MCQ প্র্যাকটিস ব্যাংক</p>
+              <p className="text-[11px] text-slate-500 font-medium">পদার্থবিজ্ঞান • রসায়ন • উদ্ভিদ • প্রাণিবিজ্ঞান MCQ ব্যাংক</p>
             </div>
           </div>
 

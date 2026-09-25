@@ -58,13 +58,13 @@ export const MCQSetsView: React.FC<MCQSetsViewProps> = ({
         <div>
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold mb-2">
             <Layers className="w-3.5 h-3.5" />
-            <span>ধারাবাহিক সিরিজ</span>
+            <span>বিজ্ঞান প্রশ্নব্যাংক • ধারাবাহিক সিরিজ</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
-            বোটানি MCQ সেটস
+            MCQ অনুশীলন সেটস (Science Sets)
           </h1>
           <p className="text-sm text-slate-500 mt-1 font-medium">
-            প্রতিটি অধ্যায়ের প্রশ্নসমূহ ২৫টি করে ধারাবাহিক সেটে বিভক্ত করা হয়েছে যাতে শিক্ষার্থীদের বোধগম্যতা সহজ হয়
+            উদ্ভিদবিজ্ঞান, প্রাণিবিজ্ঞান, পদার্থবিজ্ঞান ও রসায়ন সিরিজের অধ্যায়ভিত্তিক সেট। বর্তমানে বোটানির ৭৪টি ধারাবাহিক সেট সম্পূর্ণ সক্রিয়।
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export const MCQSetsView: React.FC<MCQSetsViewProps> = ({
             <Award className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs font-bold text-slate-500">সম্পূর্ণ সেট</div>
+            <div className="text-xs font-bold text-slate-500">বোটানি সেট সমাধান</div>
             <div className="text-lg font-extrabold text-emerald-800">
               {Object.keys(completedSets).length} / {ALL_MCQ_SETS.length} টি
             </div>

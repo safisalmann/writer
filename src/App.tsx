@@ -138,13 +138,13 @@ export default function App() {
       {currentView !== 'practice' && (
         <footer className="border-t border-slate-200/80 bg-white py-8 px-4 text-center mt-auto">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-            <div className="font-semibold">
-              <span className="text-emerald-700 font-bold">Botany Master</span> — এইচএসসি ও মেডিকেল ভর্তি পরীক্ষার উদ্ভিদবিজ্ঞান প্রশ্নব্যাংক
+            <div className="font-semibold text-slate-700">
+              <span className="text-emerald-700 font-bold">Science Master</span> — এইচএসসি ও মেডিকেল ভর্তি পরীক্ষার বিজ্ঞান প্রস্তুতি প্ল্যাটফর্ম (উদ্ভিদবিজ্ঞান, প্রাণিবিজ্ঞান, পদার্থবিজ্ঞান ও রসায়ন)
             </div>
-            <div className="flex items-center space-x-4 font-medium text-slate-400">
-              <span>১২টি অধ্যায়</span>
+            <div className="flex items-center space-x-3 font-medium text-slate-400 text-[11px]">
+              <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">বোটানি: ১২টি অধ্যায় • ১,৬৯১টি MCQ</span>
               <span>•</span>
-              <span>১,৬৯১টি MCQ</span>
+              <span>প্রাণিবিজ্ঞান, পদার্থবিজ্ঞান ও রসায়ন সেকশন সংযুক্ত হচ্ছে</span>
               <span>•</span>
               <span>অফলাইন প্রগ্রেস সেভ</span>
             </div>

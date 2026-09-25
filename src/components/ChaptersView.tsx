@@ -9,7 +9,12 @@ import {
   ArrowRight,
   Sparkles,
   HelpCircle,
-  RotateCcw
+  RotateCcw,
+  Sprout,
+  Dna,
+  Atom,
+  FlaskConical,
+  Clock
 } from 'lucide-react';
 import { CHAPTERS } from '../data/chapters';
 import { generateChapterSets } from '../data/questions';
@@ -33,6 +38,7 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
   getChapterStats,
   resetChapterProgress
 }) => {
+  const [activeSubjectTab, setActiveSubjectTab] = useState<'botany' | 'zoology' | 'physics' | 'chemistry'>('botany');
   const [expandedChapterId, setExpandedChapterId] = useState<number | null>(null);
 
   const toggleExpand = (id: number) => {
@@ -68,20 +74,101 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold mb-2">
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>বোটানি সিলেবাস</span>
+              <Sprout className="w-3.5 h-3.5" />
+              <span>বিজ্ঞান বিষয়সমূহ • উদ্ভিদবিজ্ঞান (Botany)</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
               ১২টি অধ্যায় ভিত্তিক প্রশ্নব্যাংক
             </h1>
             <p className="text-sm text-slate-500 mt-1 font-medium">
-              প্রতিটি অধ্যায়ের সব প্রশ্ন নির্ভুল উত্তর ও প্রাসঙ্গিক টপিক অনুযায়ী বিন্যস্ত করা হয়েছে
+              উদ্ভিদবিজ্ঞানের ১,৬৯১টি প্রশ্ন সঠিক উত্তর চাবি সহ প্রস্তুত। বিজ্ঞান মাস্টার প্ল্যাটফর্মে পর্যায়ক্রমে প্রাণিবিজ্ঞান, পদার্থবিজ্ঞান ও রসায়ন সংযুক্ত হচ্ছে।
             </p>
           </div>
         </div>
+
+        {/* Subject Navigation Tabs */}
+        <div className="mt-6 pt-5 border-t border-slate-100 flex flex-wrap gap-2">
+          <button
+            onClick={() => setActiveSubjectTab('botany')}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              activeSubjectTab === 'botany'
+                ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/30'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80'
+            }`}
+          >
+            <Sprout className="w-4 h-4" />
+            <span>উদ্ভিদবিজ্ঞান (Botany)</span>
+            <span className="text-[10px] bg-white/20 text-white px-1.5 py-0.2 rounded font-black">১২ অধ্যায় • লাইভ</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSubjectTab('zoology')}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              activeSubjectTab === 'zoology'
+                ? 'bg-sky-600 text-white shadow-sm shadow-sky-600/30'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80'
+            }`}
+          >
+            <Dna className="w-4 h-4" />
+            <span>প্রাণিবিজ্ঞান (Zoology)</span>
+            <span className="text-[10px] bg-amber-500/20 text-amber-700 px-1.5 py-0.2 rounded font-bold">শীঘ্রই</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSubjectTab('physics')}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              activeSubjectTab === 'physics'
+                ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/30'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80'
+            }`}
+          >
+            <Atom className="w-4 h-4" />
+            <span>পদার্থবিজ্ঞান (Physics)</span>
+            <span className="text-[10px] bg-amber-500/20 text-amber-700 px-1.5 py-0.2 rounded font-bold">শীঘ্রই</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSubjectTab('chemistry')}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              activeSubjectTab === 'chemistry'
+                ? 'bg-amber-600 text-white shadow-sm shadow-amber-600/30'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80'
+            }`}
+          >
+            <FlaskConical className="w-4 h-4" />
+            <span>রসায়ন (Chemistry)</span>
+            <span className="text-[10px] bg-amber-500/20 text-amber-700 px-1.5 py-0.2 rounded font-bold">শীঘ্রই</span>
+          </button>
+        </div>
       </div>
 
-      {/* Chapters Accordion / Card List */}
+      {/* When a pending subject is clicked */}
+      {activeSubjectTab !== 'botany' && (
+        <div className="bg-white rounded-3xl p-8 border border-slate-200 text-center shadow-xs">
+          <div className="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center mx-auto mb-4">
+            <Clock className="w-8 h-8" />
+          </div>
+          <h2 className="text-xl font-extrabold text-slate-800">
+            {activeSubjectTab === 'zoology' && 'প্রাণিবিজ্ঞান (Zoology) প্রশ্নব্যাংক'}
+            {activeSubjectTab === 'physics' && 'পদার্থবিজ্ঞান (Physics) প্রশ্নব্যাংক'}
+            {activeSubjectTab === 'chemistry' && 'রসায়ন (Chemistry) প্রশ্নব্যাংক'}
+          </h2>
+          <p className="text-sm text-slate-500 max-w-md mx-auto mt-2 leading-relaxed">
+            এই বিষয়ের অধ্যায়ভিত্তিক প্রশ্নসমূহ ডাটাবেজে যুক্ত হওয়ার প্রক্রিয়ায় রয়েছে। বর্তমানে আপনি <strong>উদ্ভিদবিজ্ঞান (Botany)</strong>-এর ১২টি অধ্যায়ের ১,৬৯১টি প্রশ্ন সম্পূর্ণ বিনামূল্যে অনুশীলন করতে পারেন।
+          </p>
+          <div className="mt-5">
+            <button
+              onClick={() => setActiveSubjectTab('botany')}
+              className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
+            >
+              উদ্ভিদবিজ্ঞান প্রশ্নব্যাংকে ফিরে যান →
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Chapters Accordion / Card List (Botany) */}
+      {activeSubjectTab === 'botany' && (
       <div className="space-y-4">
         {CHAPTERS.map(ch => {
           const stats = getChapterStats(ch.id, ch.totalQuestions);
@@ -229,6 +316,7 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
           );
         })}
       </div>
+      )}
     </div>
   );
 };

@@ -11,7 +11,11 @@ import {
   Trophy,
   Flame,
   Clock,
-  Compass
+  Compass,
+  Atom,
+  FlaskConical,
+  Dna,
+  Sprout
 } from 'lucide-react';
 import { Chapter, PracticeSessionConfig } from '../types';
 import { CHAPTERS } from '../data/chapters';
@@ -67,29 +71,81 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     }
   };
 
+  const scienceSubjects = [
+    {
+      id: 'botany',
+      nameBangla: 'উদ্ভিদবিজ্ঞান (Botany)',
+      subtitle: 'জীববিজ্ঞান ১ম পত্র',
+      stats: '১২টি অধ্যায় • ১,৬৯১টি MCQ',
+      status: 'active' as const,
+      statusLabel: 'সম্পূর্ণ সক্রিয় (Live)',
+      icon: <Sprout className="w-5 h-5 text-emerald-600" />,
+      gradient: 'from-emerald-500/10 to-teal-500/10 border-emerald-300',
+      tagColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+      desc: 'কোষ ও এর গঠন থেকে জীবের পরিবেশ পর্যন্ত ১২টি অধ্যায়ের ধারাবাহিক MCQ সেট।'
+    },
+    {
+      id: 'zoology',
+      nameBangla: 'প্রাণিবিজ্ঞান (Zoology)',
+      subtitle: 'জীববিজ্ঞান ২য় পত্র',
+      stats: '১২টি অধ্যায় • মানব শারীরতত্ত্ব ও জিনতত্ত্ব',
+      status: 'upcoming' as const,
+      statusLabel: 'শীঘ্রই আসছে (In Pipeline)',
+      icon: <Dna className="w-5 h-5 text-sky-600" />,
+      gradient: 'from-sky-500/10 to-blue-500/10 border-sky-200',
+      tagColor: 'bg-sky-100 text-sky-800 border-sky-200',
+      desc: 'প্রাণীর বিভিন্নতা, রক্ত ও সংবহন, পরিপাক, শ্বসন এবং জিনতত্ত্বের বিশেষ প্রশ্নব্যাংক।'
+    },
+    {
+      id: 'physics',
+      nameBangla: 'পদার্থবিজ্ঞান (Physics)',
+      subtitle: '১ম ও ২য় পত্র',
+      stats: 'বলবিদ্যা, তড়িৎ, তরঙ্গ ও আধুনিক পদার্থবিজ্ঞান',
+      status: 'upcoming' as const,
+      statusLabel: 'শীঘ্রই আসছে (In Pipeline)',
+      icon: <Atom className="w-5 h-5 text-indigo-600" />,
+      gradient: 'from-indigo-500/10 to-violet-500/10 border-indigo-200',
+      tagColor: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+      desc: 'ভেক্টর, গতিবিদ্যা, তাপগতিবিদ্যা, আলো এবং চলতড়িৎ ভিত্তিক গাণিতিক ও ধারণামূলক MCQ।'
+    },
+    {
+      id: 'chemistry',
+      nameBangla: 'রসায়ন (Chemistry)',
+      subtitle: '১ম ও ২য় পত্র',
+      stats: 'জৈব রসায়ন, গুণগত ও পরিমাণগত রসায়ন',
+      status: 'upcoming' as const,
+      statusLabel: 'শীঘ্রই আসছে (In Pipeline)',
+      icon: <FlaskConical className="w-5 h-5 text-amber-600" />,
+      gradient: 'from-amber-500/10 to-orange-500/10 border-amber-200',
+      tagColor: 'bg-amber-100 text-amber-800 border-amber-200',
+      desc: 'পরমাণুর গঠন, পর্যায়বৃত্ত ধর্ম, রাসায়নিক পরিবর্তন এবং জৈব যৌগের বিক্রিয়া ভিত্তিক MCQ।'
+    }
+  ];
+
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
       {/* Hero Banner */}
-      <div className="relative rounded-3xl bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 text-white p-6 sm:p-10 shadow-xl overflow-hidden border border-emerald-700/40">
+      <div className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-emerald-950 to-indigo-950 text-white p-6 sm:p-10 shadow-xl overflow-hidden border border-slate-700/50">
         {/* Abstract organic background glow */}
-        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/3 -mb-10 w-60 h-60 bg-teal-400/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/3 -mb-10 w-72 h-72 bg-sky-500/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute top-1/2 left-0 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-semibold mb-4">
             <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
-            <span>HSC ও মেডিকেল ভর্তি পরীক্ষার সম্পূর্ণ বোটানি প্রশ্নব্যাংক</span>
+            <span>HSC ও মেডিকেল ভর্তি পরীক্ষার সম্পূর্ণ বিজ্ঞান প্রশ্নব্যাংক (Science Master)</span>
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight sm:leading-snug">
-            ধারাবাহিক MCQ অনুশীলনে <br className="hidden sm:inline" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-amber-200">
-              উদ্ভিদবিজ্ঞানে শতভাগ প্রস্তুতি
+            পদার্থ, রসায়ন, উদ্ভিদ ও প্রাণিবিজ্ঞান <br className="hidden sm:inline" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-sky-200 to-indigo-200">
+              ধারাবাহিক MCQ অনুশীলন ও শতভাগ প্রস্তুতি
             </span>
           </h1>
 
           <p className="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl font-normal">
-            ১২টি অধ্যায়ের মোট ১,৬৯১টি প্রশ্ন সঠিক উত্তর চাবি সহ সাজানো রয়েছে। সেভ করে রাখুন কঠিন প্রশ্ন এবং ট্র্যাক করুন আপনার প্রস্তুতি।
+            বর্তমানে উদ্ভিদবিজ্ঞানের (Botany) ১২টি অধ্যায়ের সম্পূর্ণ ১,৬৯১টি প্রশ্ন নির্ভুল উত্তর চাবি সহ লাইভ রয়েছে। সাথে যুক্ত হচ্ছে প্রাণিবিজ্ঞান, পদার্থবিজ্ঞান ও রসায়নের অধ্যায়ভিত্তিক প্রশ্নব্যাংক।
           </p>
 
           {/* Quick Action CTA buttons */}
@@ -99,7 +155,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-500/25 transition-all flex items-center space-x-2 active:scale-95 cursor-pointer"
             >
               <Play className="w-4 h-4 fill-slate-950" />
-              <span>অনুশীলন শুরু করুন (অধ্যায় ১)</span>
+              <span>বোটানি অনুশীলন শুরু করুন (অধ্যায় ১)</span>
             </button>
 
             <button
@@ -107,9 +163,77 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold text-sm transition-all flex items-center space-x-2 cursor-pointer"
             >
               <Layers className="w-4 h-4" />
-              <span>বোটানি সেটস ব্রাউজ করুন</span>
+              <span>MCQ সেটস ব্রাউজ করুন</span>
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* 4 Core Science Subjects Hub */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight flex items-center space-x-2">
+              <span>বিজ্ঞান বিষয়সমূহ (Science Subjects)</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 font-medium">
+              এইচএসসি ও মেডিকেল ভর্তি পরীক্ষার মূল চারটি বিজ্ঞান বিষয়ের প্রস্তুতি হাব
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {scienceSubjects.map(sub => (
+            <div
+              key={sub.id}
+              onClick={() => {
+                if (sub.status === 'active') {
+                  onNavigateChapters();
+                }
+              }}
+              className={`bg-white rounded-2xl p-5 border transition-all relative flex flex-col justify-between ${
+                sub.status === 'active'
+                  ? 'border-emerald-300 shadow-xs hover:shadow-md cursor-pointer ring-1 ring-emerald-200'
+                  : 'border-slate-200/90 opacity-90'
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shadow-xs">
+                    {sub.icon}
+                  </div>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${sub.tagColor}`}>
+                    {sub.statusLabel}
+                  </span>
+                </div>
+
+                <h3 className="font-extrabold text-slate-800 text-base">
+                  {sub.nameBangla}
+                </h3>
+                <p className="text-xs text-slate-400 font-semibold mt-0.5">{sub.subtitle}</p>
+
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                  {sub.desc}
+                </p>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span className="text-[11px] font-bold text-slate-600">
+                  {sub.stats}
+                </span>
+                {sub.status === 'active' ? (
+                  <span className="text-xs font-bold text-emerald-700 flex items-center space-x-1">
+                    <span>প্রবেশ করুন</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                    প্রস্তুতি চলছে
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -190,11 +314,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       <div>
         <div className="flex items-center justify-between mb-5">
           <div>
+            <div className="inline-flex items-center space-x-1.5 text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200 mb-1">
+              <Sprout className="w-3.5 h-3.5" />
+              <span>উদ্ভিদবিজ্ঞান প্রশ্নব্যাংক (লাইভ)</span>
+            </div>
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight">
-              ১২টি অধ্যায়ের প্রশ্নব্যাংক
+              ১২টি অধ্যায়ের ধারাবাহিক প্রশ্নব্যাংক
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 font-medium">
-              আপনার সুবিধাজনক অধ্যায় নির্বাচন করে ধারাবাহিক অনুশীলন শুরু করুন
+              আপনার সুবিধাজনক অধ্যায় নির্বাচন করে ধারাবাহিক সেট বা একনজরে পুরো অধ্যায় অনুশীলন করুন
             </p>
           </div>
 

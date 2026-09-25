@@ -139,10 +139,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         <div className="p-6 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h3 className="text-lg font-extrabold text-slate-800">
-              ১২টি অধ্যায়ের বিস্তারিত পারফরম্যান্স
+              উদ্ভিদবিজ্ঞান (Botany): ১২টি অধ্যায়ের বিস্তারিত পারফরম্যান্স
             </h3>
             <p className="text-xs text-slate-400 font-medium mt-0.5">
-              অধ্যায়ভিত্তিক অগ্রগতি ও নির্ভুলতার তালিকা
+              অধ্যায়ভিত্তিক অগ্রগতি ও নির্ভুলতার তালিকা (প্রাণিবিজ্ঞান, পদার্থবিজ্ঞান ও রসায়ন ট্র্যাকার সংযুক্ত হচ্ছে)
             </p>
           </div>
         </div>
