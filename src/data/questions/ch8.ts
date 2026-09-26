@@ -1,5 +1,6 @@
 import { Question } from '../../types';
 
+
 export const CHAPTER_8_QUESTIONS: Question[] = [
   {
     "id": "ch8_1",
@@ -57,7 +58,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রাইমারি",
       "রিব"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "ভাজক টিস্যু",
     "source": "ঢা. বো: ১৭"
   },
@@ -87,7 +88,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রাইমারি",
       "টারসিয়ারি"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "ভাজক টিস্যু",
     "source": "আলীম"
   },
@@ -177,7 +178,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "এক্সার্ক",
       "প্রোটোজাইলেম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "আলীম"
   },
@@ -192,7 +193,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "এক্সার্ক",
       "প্রোটোজাইলেম"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "ভাজক টিস্যু",
     "source": "আলীম"
   },
@@ -222,7 +223,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রাইমারি",
       "টারসিয়ারি"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "ভাজক টিস্যু",
     "source": "আলীম"
   },
@@ -237,7 +238,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "কাণ্ডের বহিঃস্তর",
       "এপিডার্মিস"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "ভাজক টিস্যু",
     "source": "আলীম"
   },
@@ -252,7 +253,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "৪",
       "৫"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "আজিজুর"
   },
@@ -267,7 +268,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "৪",
       "৫"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "রা. বো: ২১"
   },
@@ -282,7 +283,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "৪",
       "৫"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "য. বো: ২১"
   },
@@ -297,7 +298,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রোটোডার্ম",
       "প্রো-মেরিস্টেম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "আজিজুর"
   },
@@ -387,7 +388,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "গ্রাউন্ড মেরিস্টেম",
       "প্রোমেরিস্টেম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "আজিজুর"
   },
@@ -402,7 +403,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "কর্ক ক্যাম্বিয়াম",
       "কর্টেক্স"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "আজিজুর"
   },
@@ -462,7 +463,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রোক্যাম্বিয়াম",
       "প্রোমেরিস্টেম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "চ. বো: ২১"
   },
@@ -522,7 +523,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "শুধুমাত্র জীবিত কোষে থাকে",
       "তুলনামূলকভাবে নিউক্লিয়াস বড়"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "ডেন্টাল: ২৩-২৪"
   },
@@ -537,7 +538,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ফ্লোয়েম ফাইবার",
       "সিভনল"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "ঢা.বি: ২১-২২"
   },
@@ -552,7 +553,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রোক্যাম্বিয়াম",
       "সবগুলো"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাজক টিস্যু",
     "source": "জা.বি: ২৩-২৪"
   },
@@ -567,7 +568,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "নিউক্লিয়াস আকারে ছোট",
       "উদ্ভিদ দেহের যান্ত্রিক দৃঢ়তা বাড়ায়"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "স্থায়ী টিস্যু ও ক্ষরণকারী টিস্যু",
     "source": "জা.বি: ২১-২২"
   },
@@ -582,7 +583,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ট্র্যাকিড",
       "ফ্লোয়েম ফাইবার"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "স্থায়ী টিস্যু ও ক্ষরণকারী টিস্যু",
     "source": "জা.বি: ২১-২২"
   },
@@ -597,7 +598,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সেকেন্ডারী",
       "ইন্টারক্যালারি"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "স্থায়ী টিস্যু ও ক্ষরণকারী টিস্যু",
     "source": "জা.বি: ১৮-১৯"
   },
@@ -642,7 +643,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্যারেনকাইমা",
       "স্ক্লেরেনকাইমা"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "স্থায়ী টিস্যু ও ক্ষরণকারী টিস্যু",
     "source": "জা.বি: ২০২৩-২৪"
   },
@@ -657,7 +658,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ট্রাইকোমে",
       "পত্ররন্ধ্রে"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "স্থায়ী টিস্যু ও ক্ষরণকারী টিস্যু",
     "source": "জা.বি: ২০২১-২০২২"
   },
@@ -687,7 +688,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "স্ক্লেরেনকাইমা",
       "কোলেনকাইমা"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "স্থায়ী টিস্যু ও ক্ষরণকারী টিস্যু",
     "source": "গুচ্ছ: ২০২১-২০২২"
   },
@@ -702,7 +703,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রোটোডার্ম",
       "রিব"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "স্থায়ী টিস্যু ও ক্ষরণকারী টিস্যু",
     "source": "রা. বো: ১২"
   },
@@ -732,7 +733,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সেকেন্ডারি ভাজক টিস্যু",
       "প্রাইমারি ভাজক টিস্যু"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "কুমিল্লা বোর্ড: ২০২৩"
   },
@@ -747,7 +748,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "কোষপ্রাচীর সেলুলোজ নির্মিত",
       "কোষগুলো পরিণত"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "কু. বো: ২১"
   },
@@ -792,7 +793,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রোক্যাম্বিয়াম",
       "প্রোমেরিস্টেম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "চ.বো: ২০২২"
   },
@@ -822,7 +823,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "কর্টেক্স",
       "জাইলেম"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "টিস্যুতন্ত্র",
     "source": "আলীম"
   },
@@ -837,7 +838,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "এপিব্লেমা",
       "কর্টেক্স"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "আলীম"
   },
@@ -882,7 +883,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্রোক্যাম্বিয়াম",
       "ক্যাম্বিয়াম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "আলীম"
   },
@@ -897,7 +898,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ক্রুসিফেরি",
       "সোলাইনেসি"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "আলীম"
   },
@@ -927,7 +928,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "চিরতা ও কলসী",
       "ধান ও গম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "আলীম"
   },
@@ -957,7 +958,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ডায়াসাইটিক",
       "প্যারাসাইটিক"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "টিস্যুতন্ত্র",
     "source": "আলীম"
   },
@@ -972,7 +973,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "এপিথেম",
       "বুলিফর্ম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "আলীম"
   },
@@ -1002,7 +1003,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ট্রাইকোম",
       "হাইডাথোড"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "সি. বো: ২১"
   },
@@ -1017,7 +1018,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "উভয় ত্বকে",
       "মধ্যত্বকে"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "টিস্যুতন্ত্র",
     "source": "আজিজুর"
   },
@@ -1032,7 +1033,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "এপিথেম",
       "কোলেটার্স"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "টিস্যুতন্ত্র",
     "source": "আজিজুর"
   },
@@ -1047,7 +1048,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "অধঃত্বকে",
       "পরিচক্রে"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "টিস্যুতন্ত্র",
     "source": "আজিজুর"
   },
@@ -1092,7 +1093,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "কর্টেক্স",
       "পেরিসাইকেল"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "টিস্যুতন্ত্র",
     "source": "আজিজুর"
   },
@@ -1107,7 +1108,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "পেরিসাইকেল",
       "এন্ডোডার্মিস"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "টিস্যুতন্ত্র",
     "source": "আজিজুর"
   },
@@ -1122,7 +1123,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "উদ্ভিদের দৈহিক বৃদ্ধি নিয়ন্ত্রণ",
       "খাদ্য তৈরি"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "টিস্যুতন্ত্র",
     "source": "আজিজুর"
   },
@@ -1137,7 +1138,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "স্ক্লেরেনকাইমা",
       "ভেসেল"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "টিস্যুতন্ত্র",
     "source": "আজিজুর"
   },
@@ -1182,7 +1183,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "আবৃতবীজী",
       "ব্রায়োফাইট"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "আজিজুর"
   },
@@ -1197,7 +1198,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "হাইড্রোসেন্ট্রিক",
       "সংযুক্ত"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "আজিজুর"
   },
@@ -1212,7 +1213,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "বদ্ধ সমপার্শ্বীয়",
       "কেন্দ্রিক"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "য.বো: ১৬"
   },
@@ -1242,7 +1243,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "জাইলেম প্যারেনকাইমা",
       "ট্র্যাকিয়া"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "আজিজুর"
   },
@@ -1287,7 +1288,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "মজ্জা",
       "ফ্লোয়েম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "ঢা. বো: ১৯"
   },
@@ -1317,7 +1318,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ভেসেল",
       "সিভনল"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "সি. বো: ১৯"
   },
@@ -1347,7 +1348,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "Pteris",
       "Oryza"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "সি. বো: ১৭"
   },
@@ -1362,7 +1363,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সমদ্বিপার্শ্বীয়",
       "লেপ্টোসেন্ট্রিক"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "সি. বো: ১৯"
   },
@@ -1392,7 +1393,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "হ্যাড্রোসেন্ট্রিক",
       "সংযুক্ত"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "ভাস্কুলার বান্ডলের প্রকারভেদ",
     "source": "ঢা. বো: ১৯"
   },
@@ -1437,7 +1438,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "জাইলেম V বা Y আকৃতিবিশিষ্ট",
       "ভাস্কুলার বান্ডল অরীয় প্রকৃতির"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "দি. বো: ১৯"
   },
@@ -1452,7 +1453,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ফ্লোয়েম দ্বারা জাইলেম চতুর্দিকে বেষ্টিত থাকে",
       "জাইলেম ও ফ্লোয়েমের মাঝে ক্যাম্বিয়াম থাকে"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "সকল বোর্ড: ১৯"
   },
@@ -1467,7 +1468,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "একবীজপত্রী মূলে",
       "দ্বিবীজপত্রী মূলে"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "য. বো: ১৯"
   },
@@ -1512,7 +1513,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সমদ্বিপার্শ্বীয়",
       "ফ্লোয়েম কেন্দ্রিক"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "য. বো: ২৩"
   },
@@ -1542,7 +1543,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "আন্তঃকোষীয় ফাঁক থাকে না",
       "কোষগুলো বিপাকে নিষ্ক্রিয়"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "ডেন্টাল: ২২-২৩"
   },
@@ -1557,7 +1558,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সমপার্শ্বীয়",
       "কেন্দ্রিক"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "জা.বি: ২৩-২৪"
   },
@@ -1587,7 +1588,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "আন্তঃকোষীয় ফাঁক থাকে না",
       "কোষগুলো বিপাকে নিষ্ক্রিয়"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "মেডিকেল: ২২-২৩"
   },
@@ -1602,7 +1603,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সমপার্শ্বীয়",
       "কেন্দ্রিক"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "জা.বি: ২৩-২৪"
   },
@@ -1677,7 +1678,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "প্যারেনকাইমা",
       "স্ক্লেরেনকাইমা"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "কৃষি গুচ্ছ: ২০২৩-২০২৪"
   },
@@ -1692,7 +1693,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ভাস্কুলার বান্ডল সংযুক্ত",
       "ভাস্কুলার বান্ডল এর সংখ্যা চার"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "আজিজুর"
   },
@@ -1707,7 +1708,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সংযুক্ত",
       "লেপ্টোসেন্ট্রিক"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "আজমল"
   },
@@ -1722,7 +1723,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "বেগুন",
       "মরিচ"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "কু. বো: ২০১৬"
   },
@@ -1737,7 +1738,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "মেসোফিল",
       "মজ্জা"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "মেডিকেল: ২১-২২"
   },
@@ -1767,7 +1768,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "বদ্ধ/সমপার্শ্বীয়",
       "কেন্দ্রিক"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "দি. বো: ১৮"
   },
@@ -1812,7 +1813,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "জাইলেম",
       "মজ্জারশ্মি"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "রা. বো: ২৩"
   },
@@ -1842,7 +1843,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ভাস্কুলার বান্ডল অসংখ্য",
       "ক্যাম্বিয়াম উপস্থিত"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "চ. বো: ২১"
   },
@@ -1857,7 +1858,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সমদ্বিপার্শ্বীয়",
       "হাইড্রোসেন্ট্রিক"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "ব. বো: ২১"
   },
@@ -1947,7 +1948,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "স্টিলি",
       "পেরিডার্ম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "ঢাকা বোর্ড-২০২৩"
   },
@@ -1962,7 +1963,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "রিব মেরিস্টেম",
       "প্রোটোডার্ম"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "কুমিল্লা বোর্ড-২০২১"
   },
@@ -1977,7 +1978,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "এপিডার্মিস",
       "কর্টেক্স"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "কুমিল্লা বোর্ড-২০২১"
   },
@@ -2022,7 +2023,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "ছোলা",
       "ড্রাসিনা"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "রা.বো-২৩"
   },
@@ -2067,7 +2068,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
       "সমদ্বিপার্শ্বীয়",
       "কেন্দ্রিক"
     ],
-    "correctAnswer": 2,
+    "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
     "source": "হাসান"
   },
