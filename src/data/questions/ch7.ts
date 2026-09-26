@@ -23,7 +23,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
     "question": "নিচের কোন উদ্ভিদে অস্থানিক মূল পাওয়া যায়?",
     "options": [
       "অর্কিড",
-      "সন্ধ্যাclock",
+      "সন্ধ্যামালতি",
       "অশ্বত্থ",
       "অপরাজিতা"
     ],
@@ -132,7 +132,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
       "৭৩",
       "৮৩"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 3,
     "topic": "নগ্নবীজী উদ্ভিদ",
     "source": "আজিজুর"
   },
@@ -432,7 +432,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
       "সিনোজোয়িক",
       "টারসিয়ারি"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 0,
     "topic": "Cycas",
     "source": "আলীম"
   },
@@ -1032,7 +1032,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
       "অতসী",
       "কুমড়া"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 3,
     "topic": "পুষ্পমঞ্জরী ও পুষ্পপ্রবিন্যাস",
     "source": "আলীম"
   },
@@ -1137,7 +1137,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
       "ধান",
       "জবা"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 3,
     "topic": "পুষ্পমঞ্জরী ও পুষ্পপ্রবিন্যাস",
     "source": "ঢা.বি: ২২-২৩"
   },
@@ -1325,7 +1325,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
     "id": "ch7_89",
     "chapterId": 7,
     "number": 89,
-    "question": "লিপ্টিয়ম হলো এক ধরনের—",
+    "question": "লিগিউম হলো এক ধরনের—",
     "options": [
       "এস্টিভেশন",
       "উপবৃত্তি",
@@ -1460,7 +1460,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
     "id": "ch7_98",
     "chapterId": 7,
     "number": 98,
-    "question": "ভুট্টা ফুলের অমরাবিন্যাস কোন ধরনের?",
+    "question": "ধুতুরা ফুলের অমরাবিন্যাস কোন ধরনের?",
     "options": [
       "অক্ষীয়",
       "মূলীয়",
@@ -1777,7 +1777,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
     "number": 119,
     "question": "এ যাবত বাংলাদেশে Poaceae গোত্রের কতটি প্রজাতি শনাক্ত করা হয়েছে?",
     "options": [
-      "২৪৫",
+      "২৮৫",
       "৪২১",
       "৮৮১",
       "৮৮৭"
@@ -1977,7 +1977,7 @@ export const CHAPTER_7_QUESTIONS: Question[] = [
       "বহুপ্রান্তীয়",
       "অক্ষীয়"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 3,
     "topic": "Malvaceae",
     "source": "দি. বো: ১৯"
   },
