@@ -42,12 +42,7 @@ jobs:
             ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm install
-          else
-            npm install
-          fi
+        run: npm install
 
       - name: Build project
         run: npm run build
