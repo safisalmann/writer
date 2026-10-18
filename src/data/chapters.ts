@@ -223,4 +223,5 @@ export const CHAPTERS: Chapter[] = [
   }
 ];
 
+export const BOTANY_CHAPTERS: Chapter[] = CHAPTERS;
 export const TOTAL_BOTANY_QUESTIONS = CHAPTERS.reduce((acc, ch) => acc + ch.totalQuestions, 0);

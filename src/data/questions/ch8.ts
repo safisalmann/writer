@@ -1,6 +1,5 @@
 import { Question } from '../../types';
 
-
 export const CHAPTER_8_QUESTIONS: Question[] = [
   {
     "id": "ch8_1",
@@ -1470,7 +1469,7 @@ export const CHAPTER_8_QUESTIONS: Question[] = [
     ],
     "correctAnswer": 1,
     "topic": "একবীজপত্রী ও দ্বিবীজপত্রী মূল/কাণ্ড",
-    "source": "য. বো: ১৯"
+    "source": "য. বো: ১৬"
   },
   {
     "id": "ch8_99",

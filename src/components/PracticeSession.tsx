@@ -17,6 +17,7 @@ import {
 import { Question, OptionIndex, PracticeSessionConfig, AnswerRecord } from '../types';
 import { getQuestionsByIds } from '../data/questions';
 import { CHAPTERS } from '../data/chapters';
+import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
 
 interface PracticeSessionProps {
   config: PracticeSessionConfig;
@@ -61,7 +62,11 @@ export const PracticeSession: React.FC<PracticeSessionProps> = ({
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const currentQuestion = questions[currentIndex];
-  const chapter = currentQuestion ? CHAPTERS.find(c => c.id === currentQuestion.chapterId) : undefined;
+  const chapter = currentQuestion 
+    ? (currentQuestion.id.startsWith('zoo_') 
+        ? ZOOLOGY_CHAPTERS.find(c => c.id === currentQuestion.chapterId) 
+        : CHAPTERS.find(c => c.id === currentQuestion.chapterId)) 
+    : undefined;
   const currentAnswer = currentQuestion ? sessionAnswers[currentQuestion.id] : undefined;
   const isSaved = currentQuestion ? isQuestionSaved(currentQuestion.id) : false;
 

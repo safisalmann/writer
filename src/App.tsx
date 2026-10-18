@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ViewMode, PracticeSessionConfig, Question } from './types';
+import { ViewMode, PracticeSessionConfig, Question, Subject } from './types';
 import { useProgress } from './hooks/useProgress';
 import { Navbar } from './components/Navbar';
 import { DashboardView } from './components/DashboardView';
@@ -10,8 +10,10 @@ import { AnalyticsView } from './components/AnalyticsView';
 import { PracticeSession } from './components/PracticeSession';
 import { SearchModal } from './components/SearchModal';
 import { CHAPTERS } from './data/chapters';
+import { ZOOLOGY_CHAPTERS } from './data/zoology_chapters';
 
 export default function App() {
+  const [currentSubject, setCurrentSubject] = useState<Subject>('zoology');
   const [currentView, setCurrentView] = useState<ViewMode>('dashboard');
   const [previousView, setPreviousView] = useState<ViewMode>('dashboard');
   const [activeSession, setActiveSession] = useState<PracticeSessionConfig | null>(null);
@@ -27,7 +29,7 @@ export default function App() {
     resetChapterProgress,
     stats,
     getChapterStats
-  } = useProgress();
+  } = useProgress(currentSubject);
 
   const handleStartSession = (config: PracticeSessionConfig) => {
     setActiveSession(config);
@@ -49,11 +51,14 @@ export default function App() {
   };
 
   const handleSelectQuestionFromSearch = (q: Question) => {
-    const ch = CHAPTERS.find(c => c.id === q.chapterId);
+    const isZoo = q.id.startsWith('zoo_') || q.subject === 'zoology';
+    const chList = isZoo ? ZOOLOGY_CHAPTERS : CHAPTERS;
+    const ch = chList.find(c => c.id === q.chapterId);
     handleStartSession({
       mode: 'practice',
+      subject: isZoo ? 'zoology' : 'botany',
       chapterId: q.chapterId,
-      title: `${ch?.nameBangla || 'অধ্যায়'} - প্রশ্ন ${q.number}`,
+      title: `${isZoo ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}: ${ch?.nameBangla || 'অধ্যায়'} - প্রশ্ন ${q.number}`,
       subtitle: q.topic || 'অনুশীলন সেশন',
       questionIds: [q.id]
     });
@@ -71,6 +76,8 @@ export default function App() {
           setCurrentView(view);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        currentSubject={currentSubject}
+        onSelectSubject={setCurrentSubject}
         savedCount={stats.savedCount}
         overallAccuracy={stats.overallAccuracy}
         completionPercentage={stats.completionPercentage}
@@ -93,29 +100,38 @@ export default function App() {
           />
         ) : currentView === 'chapters' ? (
           <ChaptersView
+            currentSubject={currentSubject}
+            onSelectSubject={setCurrentSubject}
             onStartSession={handleStartSession}
             getChapterStats={getChapterStats}
             resetChapterProgress={resetChapterProgress}
           />
         ) : currentView === 'sets' ? (
           <MCQSetsView
+            currentSubject={currentSubject}
+            onSelectSubject={setCurrentSubject}
             onStartSession={handleStartSession}
             completedSets={progress.completedSets}
           />
         ) : currentView === 'saved' ? (
           <SavedQuestionsView
+            currentSubject={currentSubject}
             savedQuestionIds={progress.savedQuestionIds}
             toggleSaveQuestion={toggleSaveQuestion}
             onStartSession={handleStartSession}
           />
         ) : currentView === 'analytics' ? (
           <AnalyticsView
+            currentSubject={currentSubject}
+            onSelectSubject={setCurrentSubject}
             stats={stats}
             getChapterStats={getChapterStats}
             resetAllProgress={resetAllProgress}
           />
         ) : (
           <DashboardView
+            currentSubject={currentSubject}
+            onSelectSubject={setCurrentSubject}
             onStartSession={handleStartSession}
             onNavigateChapters={() => setCurrentView('chapters')}
             onNavigateSets={() => setCurrentView('sets')}
@@ -139,14 +155,18 @@ export default function App() {
         <footer className="border-t border-slate-200/80 bg-white py-8 px-4 text-center mt-auto">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
             <div className="font-semibold text-slate-700">
-              <span className="text-emerald-700 font-bold">Science Master</span> — এইচএসসি ও মেডিকেল ভর্তি পরীক্ষার বিজ্ঞান প্রস্তুতি প্ল্যাটফর্ম (উদ্ভিদবিজ্ঞান, প্রাণিবিজ্ঞান, পদার্থবিজ্ঞান ও রসায়ন)
+              <span className="text-emerald-700 font-bold">Science Master</span> — এইচএসসি ও মেডিকেল ভর্তি পরীক্ষার জীববিজ্ঞান প্রশ্নব্যাংক (প্রাণিবিজ্ঞান ও উদ্ভিদবিজ্ঞান)
             </div>
-            <div className="flex items-center space-x-3 font-medium text-slate-400 text-[11px]">
-              <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">বোটানি: ১২টি অধ্যায় • ১,৬৯১টি MCQ</span>
+            <div className="flex items-center flex-wrap justify-center space-x-2 font-medium text-slate-500 text-[11px]">
+              <span className="text-cyan-800 font-bold bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">
+                প্রাণিবিজ্ঞান: ১২টি অধ্যায় • ১,৩৪৬টি MCQ
+              </span>
               <span>•</span>
-              <span>প্রাণিবিজ্ঞান, পদার্থবিজ্ঞান ও রসায়ন সেকশন সংযুক্ত হচ্ছে</span>
+              <span className="text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                উদ্ভিদবিজ্ঞান: ১২টি অধ্যায় • ১,৭২২টি MCQ
+              </span>
               <span>•</span>
-              <span>অফলাইন প্রগ্রেস সেভ</span>
+              <span>সর্বমোট ৩,০৬৮টি ভেরিফাইড প্রশ্ন ও উত্তর</span>
             </div>
           </div>
         </footer>

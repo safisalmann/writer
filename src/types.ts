@@ -1,7 +1,8 @@
 export type OptionIndex = 0 | 1 | 2 | 3;
+export type Subject = 'zoology' | 'botany';
 
 export interface Question {
-  id: string; // e.g. "ch1_1"
+  id: string; // e.g. "ch1_1" or "zoo_ch1_1"
   chapterId: number; // 1 to 12
   number: number;
   question: string;
@@ -9,6 +10,7 @@ export interface Question {
   correctAnswer: OptionIndex; // 0 for ক, 1 for খ, 2 for গ, 3 for ঘ
   topic?: string;
   source?: string;
+  subject?: Subject;
 }
 
 export interface MCQSet {
@@ -49,6 +51,7 @@ export type ViewMode = 'dashboard' | 'chapters' | 'sets' | 'practice' | 'saved' 
 
 export interface PracticeSessionConfig {
   mode: 'practice' | 'exam' | 'saved';
+  subject?: Subject;
   chapterId?: number;
   setId?: string;
   title: string;

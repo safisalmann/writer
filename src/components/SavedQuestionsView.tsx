@@ -8,24 +8,30 @@ import {
   CheckCircle2, 
   ChevronRight,
   Eye,
-  EyeOff
+  EyeOff,
+  Dna,
+  Sprout
 } from 'lucide-react';
-import { Question, PracticeSessionConfig } from '../types';
+import { Question, PracticeSessionConfig, Subject } from '../types';
 import { getQuestionsByIds } from '../data/questions';
-import { CHAPTERS } from '../data/chapters';
+import { CHAPTERS as BOTANY_CHAPTERS } from '../data/chapters';
+import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
 
 interface SavedQuestionsViewProps {
+  currentSubject?: Subject;
   savedQuestionIds: string[];
   toggleSaveQuestion: (qId: string) => void;
   onStartSession: (config: PracticeSessionConfig) => void;
 }
 
 export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
+  currentSubject,
   savedQuestionIds,
   toggleSaveQuestion,
   onStartSession
 }) => {
   const [selectedChapterId, setSelectedChapterId] = useState<number | 'all'>('all');
+  const [selectedSubjectFilter, setSelectedSubjectFilter] = useState<Subject | 'all'>('all');
   const [revealedAnswers, setRevealedAnswers] = useState<Record<string, boolean>>({});
 
   const savedQuestions = useMemo(() => {
@@ -33,9 +39,14 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
   }, [savedQuestionIds]);
 
   const filteredQuestions = useMemo(() => {
-    if (selectedChapterId === 'all') return savedQuestions;
-    return savedQuestions.filter(q => q.chapterId === selectedChapterId);
-  }, [savedQuestions, selectedChapterId]);
+    return savedQuestions.filter(q => {
+      const isZoo = q.id.startsWith('zoo_') || q.subject === 'zoology';
+      if (selectedSubjectFilter === 'zoology' && !isZoo) return false;
+      if (selectedSubjectFilter === 'botany' && isZoo) return false;
+      if (selectedChapterId !== 'all' && q.chapterId !== selectedChapterId) return false;
+      return true;
+    });
+  }, [savedQuestions, selectedChapterId, selectedSubjectFilter]);
 
   const toggleReveal = (qId: string) => {
     setRevealedAnswers(prev => ({
@@ -98,41 +109,73 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
         </div>
       ) : (
         <div className="space-y-4">
-          {/* Chapter Filter Bar */}
-          <div className="bg-white p-3.5 rounded-2xl border border-slate-200 flex items-center space-x-2 overflow-x-auto text-xs scrollbar-none">
-            <button
-              onClick={() => setSelectedChapterId('all')}
-              className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-colors ${
-                selectedChapterId === 'all'
-                  ? 'bg-amber-500 text-white shadow-xs'
-                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-              }`}
-            >
-              সব অধ্যায় ({savedQuestions.length})
-            </button>
-            {CHAPTERS.map(ch => {
-              const count = savedQuestions.filter(q => q.chapterId === ch.id).length;
-              if (count === 0) return null;
-              return (
+          {/* Subject & Chapter Filter Bar */}
+          <div className="bg-white p-3.5 rounded-2xl border border-slate-200 flex flex-wrap items-center gap-2 text-xs">
+            <div className="flex items-center space-x-1.5 pr-2 border-r border-slate-200">
+              <button
+                onClick={() => setSelectedSubjectFilter('all')}
+                className={`px-3 py-1.5 rounded-xl font-bold transition-colors cursor-pointer ${
+                  selectedSubjectFilter === 'all'
+                    ? 'bg-amber-500 text-white shadow-xs'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                }`}
+              >
+                উভয় বিষয় ({savedQuestions.length})
+              </button>
+              <button
+                onClick={() => setSelectedSubjectFilter('zoology')}
+                className={`px-3 py-1.5 rounded-xl font-bold transition-colors flex items-center space-x-1 cursor-pointer ${
+                  selectedSubjectFilter === 'zoology'
+                    ? 'bg-cyan-600 text-white shadow-xs'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                }`}
+              >
+                <Dna className="w-3 h-3" />
+                <span>প্রাণিবিজ্ঞান</span>
+              </button>
+              <button
+                onClick={() => setSelectedSubjectFilter('botany')}
+                className={`px-3 py-1.5 rounded-xl font-bold transition-colors flex items-center space-x-1 cursor-pointer ${
+                  selectedSubjectFilter === 'botany'
+                    ? 'bg-emerald-600 text-white shadow-xs'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                }`}
+              >
+                <Sprout className="w-3 h-3" />
+                <span>উদ্ভিদবিজ্ঞান</span>
+              </button>
+            </div>
+
+            <div className="flex items-center space-x-1.5 overflow-x-auto scrollbar-none">
+              <button
+                onClick={() => setSelectedChapterId('all')}
+                className={`px-2.5 py-1 rounded-lg font-bold transition-colors cursor-pointer ${
+                  selectedChapterId === 'all' ? 'bg-slate-800 text-white' : 'text-slate-600 hover:bg-slate-100'
+                }`}
+              >
+                সকল অধ্যায়
+              </button>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(num => (
                 <button
-                  key={ch.id}
-                  onClick={() => setSelectedChapterId(ch.id)}
-                  className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors ${
-                    selectedChapterId === ch.id
-                      ? 'bg-amber-500 text-white shadow-xs'
-                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  key={num}
+                  onClick={() => setSelectedChapterId(num)}
+                  className={`px-2 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
+                    selectedChapterId === num ? 'bg-slate-800 text-white font-bold' : 'text-slate-600 hover:bg-slate-100'
                   }`}
                 >
-                  অধ্যায় {ch.number}: {ch.nameBangla.slice(0, 10)}... ({count})
+                  অঃ {num}
                 </button>
-              );
-            })}
+              ))}
+            </div>
           </div>
 
-          {/* Question Cards List */}
-          <div className="space-y-4">
-            {filteredQuestions.map((q, idx) => {
-              const ch = CHAPTERS.find(c => c.id === q.chapterId);
+          {/* Questions List */}
+          <div className="space-y-3">
+            {filteredQuestions.map((q) => {
+              const isZoo = q.id.startsWith('zoo_') || q.subject === 'zoology';
+              const ch = isZoo 
+                ? ZOOLOGY_CHAPTERS.find(c => c.id === q.chapterId) 
+                : BOTANY_CHAPTERS.find(c => c.id === q.chapterId);
               const isRevealed = revealedAnswers[q.id] || false;
 
               return (
@@ -142,7 +185,12 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
                 >
                   {/* Top Bar */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 text-xs">
+                    <div className="flex items-center flex-wrap gap-1.5 text-xs">
+                      <span className={`font-black px-2 py-0.5 rounded-md text-[11px] ${
+                        isZoo ? 'bg-cyan-100 text-cyan-900' : 'bg-emerald-100 text-emerald-900'
+                      }`}>
+                        {isZoo ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}
+                      </span>
                       <span className="font-extrabold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/60">
                         অধ্যায় {q.chapterId}: {ch?.nameBangla}
                       </span>
@@ -178,41 +226,40 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
                       return (
                         <div
                           key={optIdx}
-                          className={`p-3 rounded-xl border text-sm font-medium flex items-center justify-between ${
-                            isRevealed && isCorrect
-                              ? 'bg-emerald-50 border-emerald-400 text-emerald-900 font-bold'
-                              : 'bg-slate-50/70 border-slate-200 text-slate-700'
+                          className={`p-3 rounded-xl border text-sm font-medium flex items-center space-x-2.5 transition-all ${
+                            isRevealed
+                              ? isCorrect
+                                ? 'bg-emerald-50 border-emerald-400 text-emerald-950 font-bold'
+                                : 'bg-slate-50/60 border-slate-200 text-slate-600'
+                              : 'bg-slate-50/40 border-slate-200/80 text-slate-700'
                           }`}
                         >
-                          <div className="flex items-center space-x-2">
-                            <span className={`w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 ${
-                              isRevealed && isCorrect ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
-                            }`}>
-                              {optionLabels[optIdx]}
-                            </span>
-                            <span>{opt}</span>
-                          </div>
-                          {isRevealed && isCorrect && (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                          )}
+                          <span className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold ${
+                            isRevealed && isCorrect
+                              ? 'bg-emerald-600 text-white'
+                              : 'bg-slate-200 text-slate-700'
+                          }`}>
+                            {optionLabels[optIdx]}
+                          </span>
+                          <span>{opt}</span>
                         </div>
                       );
                     })}
                   </div>
 
-                  {/* Reveal Answer Toggle */}
-                  <div className="pt-2 flex items-center justify-between border-t border-slate-100">
+                  {/* Answer Reveal Toggle Bar */}
+                  <div className="pt-2 flex items-center justify-between text-xs border-t border-slate-100">
                     <button
                       onClick={() => toggleReveal(q.id)}
-                      className="text-xs font-bold text-slate-600 hover:text-emerald-700 flex items-center space-x-1.5 py-1 px-2 rounded-lg hover:bg-slate-50 cursor-pointer"
+                      className="text-amber-700 font-bold hover:text-amber-800 flex items-center space-x-1 cursor-pointer"
                     >
                       {isRevealed ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                       <span>{isRevealed ? 'সঠিক উত্তর লুকান' : 'সঠিক উত্তর দেখুন'}</span>
                     </button>
 
                     {isRevealed && (
-                      <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
-                        সঠিক উত্তর: ({optionLabels[q.correctAnswer]}) {q.options[q.correctAnswer]}
+                      <span className="text-emerald-700 font-bold">
+                        সঠিক উত্তর: {optionLabels[q.correctAnswer]} ({q.options[q.correctAnswer]})
                       </span>
                     )}
                   </div>
