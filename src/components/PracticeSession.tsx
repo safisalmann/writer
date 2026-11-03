@@ -12,12 +12,14 @@ import {
   Clock,
   Sparkles,
   HelpCircle,
-  Share2
+  Share2,
+  Lightbulb
 } from 'lucide-react';
 import { Question, OptionIndex, PracticeSessionConfig, AnswerRecord } from '../types';
 import { getQuestionsByIds } from '../data/questions';
 import { CHAPTERS } from '../data/chapters';
 import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
+import { PHYSICS_CHAPTERS } from '../data/physics_chapters';
 
 interface PracticeSessionProps {
   config: PracticeSessionConfig;
@@ -63,9 +65,11 @@ export const PracticeSession: React.FC<PracticeSessionProps> = ({
 
   const currentQuestion = questions[currentIndex];
   const chapter = currentQuestion 
-    ? (currentQuestion.id.startsWith('zoo_') 
-        ? ZOOLOGY_CHAPTERS.find(c => c.id === currentQuestion.chapterId) 
-        : CHAPTERS.find(c => c.id === currentQuestion.chapterId)) 
+    ? (currentQuestion.subject === 'physics' || currentQuestion.id.startsWith('phy_')
+        ? PHYSICS_CHAPTERS.find(c => c.id === currentQuestion.chapterId)
+        : (currentQuestion.subject === 'zoology' || currentQuestion.id.startsWith('zoo_')
+            ? ZOOLOGY_CHAPTERS.find(c => c.id === currentQuestion.chapterId) 
+            : CHAPTERS.find(c => c.id === currentQuestion.chapterId))) 
     : undefined;
   const currentAnswer = currentQuestion ? sessionAnswers[currentQuestion.id] : undefined;
   const isSaved = currentQuestion ? isQuestionSaved(currentQuestion.id) : false;
@@ -486,6 +490,19 @@ export const PracticeSession: React.FC<PracticeSessionProps> = ({
                   + সেভ করুন
                 </button>
               )}
+            </div>
+          )}
+
+          {/* Detailed Question Explanation */}
+          {currentAnswer && currentQuestion.explanation && (
+            <div className="mt-3.5 p-4 rounded-xl border border-sky-200 bg-sky-50/80 text-slate-800 text-xs sm:text-sm shadow-xs animate-in fade-in slide-in-from-top-1 duration-200">
+              <div className="flex items-center space-x-1.5 font-bold text-sky-900 mb-1.5">
+                <Lightbulb className="w-4 h-4 text-amber-500 shrink-0" />
+                <span className="text-xs uppercase tracking-wider font-extrabold text-sky-800">সহজ ব্যাখ্যা (Explanation):</span>
+              </div>
+              <p className="text-slate-700 font-medium leading-relaxed pl-5.5">
+                {currentQuestion.explanation}
+              </p>
             </div>
           )}
         </div>

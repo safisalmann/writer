@@ -10,12 +10,15 @@ import {
   Eye,
   EyeOff,
   Dna,
-  Sprout
+  Sprout,
+  Atom,
+  Lightbulb
 } from 'lucide-react';
 import { Question, PracticeSessionConfig, Subject } from '../types';
 import { getQuestionsByIds } from '../data/questions';
 import { CHAPTERS as BOTANY_CHAPTERS } from '../data/chapters';
 import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
+import { PHYSICS_CHAPTERS } from '../data/physics_chapters';
 
 interface SavedQuestionsViewProps {
   currentSubject?: Subject;
@@ -40,9 +43,11 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
 
   const filteredQuestions = useMemo(() => {
     return savedQuestions.filter(q => {
+      const isPhy = q.id.startsWith('phy_') || q.subject === 'physics';
       const isZoo = q.id.startsWith('zoo_') || q.subject === 'zoology';
+      if (selectedSubjectFilter === 'physics' && !isPhy) return false;
       if (selectedSubjectFilter === 'zoology' && !isZoo) return false;
-      if (selectedSubjectFilter === 'botany' && isZoo) return false;
+      if (selectedSubjectFilter === 'botany' && (isZoo || isPhy)) return false;
       if (selectedChapterId !== 'all' && q.chapterId !== selectedChapterId) return false;
       return true;
     });
@@ -120,7 +125,18 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
                     : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                 }`}
               >
-                উভয় বিষয় ({savedQuestions.length})
+                সকল বিষয় ({savedQuestions.length})
+              </button>
+              <button
+                onClick={() => setSelectedSubjectFilter('physics')}
+                className={`px-3 py-1.5 rounded-xl font-bold transition-colors flex items-center space-x-1 cursor-pointer ${
+                  selectedSubjectFilter === 'physics'
+                    ? 'bg-violet-600 text-white shadow-xs'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                }`}
+              >
+                <Atom className="w-3 h-3" />
+                <span>পদার্থবিজ্ঞান</span>
               </button>
               <button
                 onClick={() => setSelectedSubjectFilter('zoology')}
@@ -172,8 +188,11 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
           {/* Questions List */}
           <div className="space-y-3">
             {filteredQuestions.map((q) => {
+              const isPhy = q.id.startsWith('phy_') || q.subject === 'physics';
               const isZoo = q.id.startsWith('zoo_') || q.subject === 'zoology';
-              const ch = isZoo 
+              const ch = isPhy
+                ? PHYSICS_CHAPTERS.find(c => c.id === q.chapterId)
+                : isZoo 
                 ? ZOOLOGY_CHAPTERS.find(c => c.id === q.chapterId) 
                 : BOTANY_CHAPTERS.find(c => c.id === q.chapterId);
               const isRevealed = revealedAnswers[q.id] || false;
@@ -187,9 +206,13 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center flex-wrap gap-1.5 text-xs">
                       <span className={`font-black px-2 py-0.5 rounded-md text-[11px] ${
-                        isZoo ? 'bg-cyan-100 text-cyan-900' : 'bg-emerald-100 text-emerald-900'
+                        isPhy
+                          ? 'bg-violet-100 text-violet-900'
+                          : isZoo 
+                          ? 'bg-cyan-100 text-cyan-900' 
+                          : 'bg-emerald-100 text-emerald-900'
                       }`}>
-                        {isZoo ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}
+                        {isPhy ? 'পদার্থবিজ্ঞান' : isZoo ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}
                       </span>
                       <span className="font-extrabold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/60">
                         অধ্যায় {q.chapterId}: {ch?.nameBangla}
@@ -247,20 +270,34 @@ export const SavedQuestionsView: React.FC<SavedQuestionsViewProps> = ({
                     })}
                   </div>
 
-                  {/* Answer Reveal Toggle Bar */}
-                  <div className="pt-2 flex items-center justify-between text-xs border-t border-slate-100">
-                    <button
-                      onClick={() => toggleReveal(q.id)}
-                      className="text-amber-700 font-bold hover:text-amber-800 flex items-center space-x-1 cursor-pointer"
-                    >
-                      {isRevealed ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-                      <span>{isRevealed ? 'সঠিক উত্তর লুকান' : 'সঠিক উত্তর দেখুন'}</span>
-                    </button>
+                  {/* Answer Reveal Toggle Bar & Explanation */}
+                  <div className="pt-2 flex flex-col space-y-2 border-t border-slate-100 text-xs">
+                    <div className="flex items-center justify-between">
+                      <button
+                        onClick={() => toggleReveal(q.id)}
+                        className="text-amber-700 font-bold hover:text-amber-800 flex items-center space-x-1 cursor-pointer"
+                      >
+                        {isRevealed ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                        <span>{isRevealed ? 'সঠিক উত্তর লুকান' : 'সঠিক উত্তর দেখুন'}</span>
+                      </button>
 
-                    {isRevealed && (
-                      <span className="text-emerald-700 font-bold">
-                        সঠিক উত্তর: {optionLabels[q.correctAnswer]} ({q.options[q.correctAnswer]})
-                      </span>
+                      {isRevealed && (
+                        <span className="text-emerald-700 font-bold">
+                          সঠিক উত্তর: {optionLabels[q.correctAnswer]} ({q.options[q.correctAnswer]})
+                        </span>
+                      )}
+                    </div>
+
+                    {isRevealed && q.explanation && (
+                      <div className="p-3 bg-sky-50 border border-sky-200 rounded-xl text-slate-800 text-xs">
+                        <div className="flex items-center space-x-1 font-bold text-sky-900 mb-1">
+                          <Lightbulb className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                          <span>ব্যাখ্যা:</span>
+                        </div>
+                        <p className="text-slate-700 font-normal leading-relaxed pl-4">
+                          {q.explanation}
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>

@@ -10,10 +10,12 @@ import {
   TrendingUp,
   AlertTriangle,
   Dna,
-  Sprout
+  Sprout,
+  Atom
 } from 'lucide-react';
 import { CHAPTERS as BOTANY_CHAPTERS } from '../data/chapters';
 import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
+import { PHYSICS_CHAPTERS } from '../data/physics_chapters';
 import { Subject } from '../types';
 
 interface AnalyticsViewProps {
@@ -47,8 +49,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
   getChapterStats,
   resetAllProgress
 }) => {
+  const isPhysics = currentSubject === 'physics';
   const isZoology = currentSubject === 'zoology';
-  const chapters = isZoology ? ZOOLOGY_CHAPTERS : BOTANY_CHAPTERS;
+  const chapters = isPhysics ? PHYSICS_CHAPTERS : isZoology ? ZOOLOGY_CHAPTERS : BOTANY_CHAPTERS;
+  const subjectName = isPhysics ? 'পদার্থবিজ্ঞান' : isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান';
 
   const handleReset = () => {
     if (confirm('আপনি কি নিশ্চিত যে আপনার সমস্ত MCQ অনুশীলনের অগ্রগতি এবং উত্তর রিসেট করতে চান? এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না।')) {
@@ -62,10 +66,14 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold mb-2 ${
-            isZoology ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+            isPhysics
+              ? 'bg-violet-50 text-violet-800 border border-violet-200'
+              : isZoology 
+              ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' 
+              : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
           }`}>
             <BarChart3 className="w-3.5 h-3.5" />
-            <span>প্রস্তুতি বিশ্লেষণ • {isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}</span>
+            <span>প্রস্তুতি বিশ্লেষণ • {subjectName}</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
             অগ্রগতি ট্র্যাকার ও পরিসংখ্যান
@@ -76,6 +84,17 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
 
           {/* Subject Switcher Tabs */}
           <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              onClick={() => onSelectSubject('physics')}
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                isPhysics
+                  ? 'bg-violet-600 text-white shadow-sm'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              <Atom className="w-3.5 h-3.5" />
+              <span>পদার্থবিজ্ঞান (৩৩২ MCQ)</span>
+            </button>
             <button
               onClick={() => onSelectSubject('zoology')}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
@@ -90,7 +109,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
             <button
               onClick={() => onSelectSubject('botany')}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                !isZoology
+                !isZoology && !isPhysics
                   ? 'bg-emerald-600 text-white shadow-sm'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}

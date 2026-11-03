@@ -99,7 +99,7 @@ export function useProgress(currentSubject: Subject = 'zoology') {
   const resetChapterProgress = useCallback((chapterId: number, subject: Subject = currentSubject) => {
     setProgress(prev => {
       const newAnswers = { ...prev.answers };
-      const prefix = subject === 'zoology' ? `zoo_ch${chapterId}_` : `ch${chapterId}_`;
+      const prefix = subject === 'physics' ? `phy_ch${chapterId}_` : subject === 'zoology' ? `zoo_ch${chapterId}_` : `ch${chapterId}_`;
       Object.keys(newAnswers).forEach(qId => {
         if (qId.startsWith(prefix)) {
           delete newAnswers[qId];
@@ -112,13 +112,18 @@ export function useProgress(currentSubject: Subject = 'zoology') {
     });
   }, [currentSubject]);
 
+  const matchesSubject = useCallback((qId: string, subject: Subject) => {
+    if (subject === 'physics') return qId.startsWith('phy_');
+    if (subject === 'zoology') return qId.startsWith('zoo_');
+    return !qId.startsWith('phy_') && !qId.startsWith('zoo_');
+  }, []);
+
   // Subject-specific and overall Statistics
   const subjectQuestions = getQuestionsForSubject(currentSubject);
   const totalQuestions = subjectQuestions.length;
   
   const subjectAnswers = Object.entries(progress.answers).filter(([qId]) => {
-    const isZoo = qId.startsWith('zoo_');
-    return currentSubject === 'zoology' ? isZoo : !isZoo;
+    return matchesSubject(qId, currentSubject);
   });
 
   const answeredCount = subjectAnswers.length;
@@ -128,13 +133,12 @@ export function useProgress(currentSubject: Subject = 'zoology') {
   const completionPercentage = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
 
   const subjectSavedCount = progress.savedQuestionIds.filter(qId => {
-    const isZoo = qId.startsWith('zoo_');
-    return currentSubject === 'zoology' ? isZoo : !isZoo;
+    return matchesSubject(qId, currentSubject);
   }).length;
 
   // Chapter specific stats helper
   const getChapterStats = useCallback((chapterId: number, chapterTotalQuestions: number, subject: Subject = currentSubject) => {
-    const prefix = subject === 'zoology' ? `zoo_ch${chapterId}_` : `ch${chapterId}_`;
+    const prefix = subject === 'physics' ? `phy_ch${chapterId}_` : subject === 'zoology' ? `zoo_ch${chapterId}_` : `ch${chapterId}_`;
     let answered = 0;
     let correct = 0;
 

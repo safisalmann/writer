@@ -20,6 +20,7 @@ import {
 import { Chapter, PracticeSessionConfig, Subject } from '../types';
 import { CHAPTERS as BOTANY_CHAPTERS } from '../data/chapters';
 import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
+import { PHYSICS_CHAPTERS } from '../data/physics_chapters';
 import { generateChapterSets } from '../data/questions';
 
 interface DashboardViewProps {
@@ -59,8 +60,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   stats,
   getChapterStats
 }) => {
+  const isPhysics = currentSubject === 'physics';
   const isZoology = currentSubject === 'zoology';
-  const activeChapters = isZoology ? ZOOLOGY_CHAPTERS : BOTANY_CHAPTERS;
+  const activeChapters = isPhysics ? PHYSICS_CHAPTERS : isZoology ? ZOOLOGY_CHAPTERS : BOTANY_CHAPTERS;
   const quickStartChapter = activeChapters[0];
 
   const handleStartChapterSet1 = (chapter: Chapter) => {
@@ -71,7 +73,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         subject: currentSubject,
         chapterId: chapter.id,
         setId: sets[0].id,
-        title: `${isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}: ${sets[0].title}`,
+        title: `${isPhysics ? 'পদার্থবিজ্ঞান' : isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}: ${sets[0].title}`,
         subtitle: sets[0].description,
         questionIds: sets[0].questionIds
       });
@@ -85,6 +87,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   };
 
   const scienceSubjects = [
+    {
+      id: 'physics' as const,
+      nameBangla: 'পদার্থবিজ্ঞান (Physics)',
+      subtitle: 'পদার্থবিজ্ঞান ২য় পত্র',
+      stats: '২টি অধ্যায় • ৩৩২টি MCQ (ব্যাখ্যাসহ)',
+      status: 'active' as const,
+      statusLabel: 'সম্পূর্ণ সক্রিয় (Live - অধ্যায় ৪ ও ৫)',
+      icon: <Atom className="w-5 h-5 text-violet-600" />,
+      gradient: isPhysics
+        ? 'from-violet-500/15 to-indigo-500/15 border-violet-400 ring-2 ring-violet-500/20'
+        : 'from-slate-50 to-violet-50/40 border-slate-200 hover:border-violet-300',
+      tagColor: 'bg-violet-100 text-violet-900 border-violet-200',
+      desc: 'অধ্যায় ৪ (তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চুম্বকত্ব - ২৪৩ MCQ) এবং অধ্যায় ৫ (তড়িৎ চৌম্বক আবেশ ও পরিবর্তী প্রবাহ - ৮৯ MCQ) এর ব্যাখ্যা ও সঠিক উত্তরসহ স্ট্যান্ডার্ড প্রশ্নব্যাংক।'
+    },
     {
       id: 'zoology' as const,
       nameBangla: 'প্রাণিবিজ্ঞান (Zoology)',
@@ -107,23 +123,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       status: 'active' as const,
       statusLabel: 'সম্পূর্ণ সক্রিয় (Live)',
       icon: <Sprout className="w-5 h-5 text-emerald-600" />,
-      gradient: !isZoology 
+      gradient: (!isZoology && !isPhysics)
         ? 'from-emerald-500/15 to-teal-500/15 border-emerald-400 ring-2 ring-emerald-500/20' 
         : 'from-slate-50 to-emerald-50/40 border-slate-200 hover:border-emerald-300',
       tagColor: 'bg-emerald-100 text-emerald-900 border-emerald-200',
       desc: 'কোষ ও এর গঠন, কোষ বিভাজন, অণুজীব, শৈবাল ও ছত্রাক, ব্রায়োফাইটা, নগ্নবীজী ও আবৃতবীজী, টিস্যুতন্ত্র, শারীরতত্ত্ব, প্রজনন, প্রযুক্তি ও পরিবেশ।'
-    },
-    {
-      id: 'physics' as const,
-      nameBangla: 'পদার্থবিজ্ঞান (Physics)',
-      subtitle: 'পদার্থবিজ্ঞান ১ম ও ২য় পত্র',
-      stats: 'ভৌত জগৎ, গতিবিদ্যা, কাজ শক্তি ও তরঙ্গ',
-      status: 'upcoming' as const,
-      statusLabel: 'শীঘ্রই আসছে',
-      icon: <Atom className="w-5 h-5 text-indigo-500" />,
-      gradient: 'from-slate-50 to-indigo-50/30 border-slate-200 opacity-75',
-      tagColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-      desc: 'বলবিদ্যা, তাপগতিবিদ্যা, আলো, তড়িৎ ও আধুনিক পদার্থবিজ্ঞানের স্ট্যান্ডার্ড প্রশ্নব্যাংক।'
     },
     {
       id: 'chemistry' as const,
@@ -143,25 +147,29 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     <div className="space-y-8 animate-in fade-in duration-200">
       {/* Hero Banner */}
       <div className={`relative overflow-hidden rounded-3xl p-6 sm:p-10 text-white shadow-xl ${
-        isZoology
+        isPhysics
+          ? 'bg-gradient-to-r from-violet-950 via-purple-900 to-indigo-950 shadow-violet-950/20'
+          : isZoology
           ? 'bg-gradient-to-r from-cyan-900 via-blue-900 to-indigo-950 shadow-cyan-950/20'
           : 'bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 shadow-emerald-950/20'
       }`}>
         <div className="relative z-10 max-w-2xl">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold mb-3 border border-white/20">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>এইচএসসি ও মেডিকেল ভর্তি পরীক্ষা স্পেশাল</span>
+            <span>এইচএসসি ও মেডিকেল ভর্তি পরীক্ষা স্পেশাল • ব্যাখ্যাসহ MCQ</span>
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-            {isZoology ? 'প্রাণিবিজ্ঞান (Zoology)' : 'উদ্ভিদবিজ্ঞান (Botany)'} <br />
-            <span className={isZoology ? 'text-cyan-300' : 'text-emerald-300'}>
-              ১২টি অধ্যায়ের ধারাবাহিক প্রশ্নব্যাংক
+            {isPhysics ? 'পদার্থবিজ্ঞান ২য় পত্র (Physics)' : isZoology ? 'প্রাণিবিজ্ঞান (Zoology)' : 'উদ্ভিদবিজ্ঞান (Botany)'} <br />
+            <span className={isPhysics ? 'text-violet-300' : isZoology ? 'text-cyan-300' : 'text-emerald-300'}>
+              {isPhysics ? 'অধ্যায় ৪ ও ৫ এর পূর্ণাঙ্গ প্রশ্নব্যাংক' : '১২টি অধ্যায়ের ধারাবাহিক প্রশ্নব্যাংক'}
             </span>
           </h1>
 
           <p className="mt-3 text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
-            {isZoology ? (
+            {isPhysics ? (
+              <>অধ্যায় ৪ (তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চুম্বকত্ব - ২৪৩ MCQ) এবং অধ্যায় ৫ (তড়িৎ চৌম্বক আবেশ ও পরিবর্তী প্রবাহ - ৮৯ MCQ) মোট <strong>৩৩২টি</strong> প্রশ্ন সঠিক উত্তর ও সহজ ব্যাখ্যাসহ সংকলিত।</>
+            ) : isZoology ? (
               <>প্রাণিবিজ্ঞানের ১২টি অধ্যায়ে <strong>১,৩৪৬টি</strong> মানসম্মত MCQ প্রশ্ন সঠিক উত্তর চাবি ও টপিকসহ প্রস্তুত। অধ্যায়ভিত্তিক ও সেটভিত্তিক অনুশীলন করুন।</>
             ) : (
               <>উদ্ভিদবিজ্ঞানের ১২টি অধ্যায়ে <strong>১,৭২২টি</strong> মানসম্মত MCQ প্রশ্ন সঠিক উত্তর চাবি ও টপিকসহ প্রস্তুত।</>
@@ -174,7 +182,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className="px-6 py-3 bg-white text-slate-900 hover:bg-slate-100 font-bold rounded-2xl shadow-lg transition-all flex items-center space-x-2 cursor-pointer active:scale-95"
             >
               <Play className="w-4 h-4 fill-slate-900" />
-              <span>অনুশীলন শুরু করুন (অধ্যায় ১)</span>
+              <span>{isPhysics ? 'অনুশীলন শুরু করুন (অধ্যায় ৪)' : 'অনুশীলন শুরু করুন (অধ্যায় ১)'}</span>
             </button>
 
             <button
@@ -182,7 +190,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className="px-5 py-3 bg-white/15 hover:bg-white/25 text-white font-bold rounded-2xl backdrop-blur-md border border-white/20 transition-all flex items-center space-x-2 cursor-pointer"
             >
               <BookOpen className="w-4 h-4" />
-              <span>১২টি অধ্যায় ব্রাউজ করুন</span>
+              <span>{isPhysics ? 'অধ্যায়সমূহ ব্রাউজ করুন' : '১২টি অধ্যায় ব্রাউজ করুন'}</span>
             </button>
           </div>
         </div>
@@ -190,7 +198,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Decorative Background Graphics */}
         <div className="absolute -right-10 -bottom-10 w-72 h-72 bg-white/5 rounded-full blur-2xl pointer-events-none" />
         <div className="absolute right-12 top-10 hidden md:block opacity-20">
-          {isZoology ? (
+          {isPhysics ? (
+            <Atom className="w-56 h-56 text-violet-200" />
+          ) : isZoology ? (
             <Dna className="w-56 h-56 text-cyan-200" />
           ) : (
             <Sprout className="w-56 h-56 text-emerald-200" />

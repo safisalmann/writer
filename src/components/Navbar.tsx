@@ -42,11 +42,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  const subjectNameBangla = currentSubject === 'zoology' ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান';
+  const subjectNameBangla = currentSubject === 'physics' ? 'পদার্থবিজ্ঞান' : currentSubject === 'zoology' ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান';
+  const chapterCountLabel = currentSubject === 'physics' ? 'অধ্যায়সমূহ (পদার্থবিজ্ঞান)' : `১২টি অধ্যায় (${subjectNameBangla})`;
 
   const navItems: { id: ViewMode; label: string; icon: React.ReactNode; badge?: number }[] = [
     { id: 'dashboard', label: 'ড্যাশবোর্ড', icon: <LayoutDashboard className="w-4 h-4" /> },
-    { id: 'chapters', label: `১২টি অধ্যায় (${subjectNameBangla})`, icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'chapters', label: chapterCountLabel, icon: <BookOpen className="w-4 h-4" /> },
     { id: 'sets', label: 'MCQ অনুশীলন সেটস', icon: <Layers className="w-4 h-4" /> },
     { 
       id: 'saved', 
@@ -67,11 +68,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center space-x-3 cursor-pointer group select-none shrink-0"
           >
             <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${
-              currentSubject === 'zoology'
+              currentSubject === 'physics'
+                ? 'from-violet-600 via-indigo-600 to-purple-700 shadow-violet-500/25'
+                : currentSubject === 'zoology'
                 ? 'from-cyan-600 via-sky-600 to-blue-700 shadow-sky-500/25'
                 : 'from-emerald-600 via-teal-600 to-indigo-700 shadow-emerald-500/25'
             } flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform`}>
-              {currentSubject === 'zoology' ? (
+              {currentSubject === 'physics' ? (
+                <Atom className="w-5 h-5 animate-spin-slow" />
+              ) : currentSubject === 'zoology' ? (
                 <Dna className="w-5 h-5 animate-pulse" />
               ) : (
                 <Sprout className="w-5 h-5 animate-pulse" />
@@ -79,19 +84,36 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
             <div>
               <div className="flex items-center space-x-1.5">
-                <span className="font-extrabold text-base sm:text-lg text-slate-800 tracking-tight">Biology Master</span>
+                <span className="font-extrabold text-base sm:text-lg text-slate-800 tracking-tight">MCQ Master Pro</span>
                 <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">
                   HSC & Med
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
-                প্রাণিবিজ্ঞান ও উদ্ভিদবিজ্ঞান ৩,০৬৮+ MCQ ব্যাংক
+                পদার্থবিজ্ঞান, প্রাণিবিজ্ঞান ও উদ্ভিদবিজ্ঞান ৩,৪০০+ MCQ ব্যাংক
               </p>
             </div>
           </div>
 
           {/* Center Subject Switcher Tabs */}
           <div className="hidden lg:flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/80">
+            <button
+              onClick={() => onSelectSubject('physics')}
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                currentSubject === 'physics'
+                  ? 'bg-violet-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+              }`}
+            >
+              <Atom className="w-3.5 h-3.5" />
+              <span>পদার্থ ২য় পত্র (Physics)</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded font-black ${
+                currentSubject === 'physics' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+              }`}>
+                ৩৩২ MCQ
+              </span>
+            </button>
+
             <button
               onClick={() => onSelectSubject('zoology')}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
@@ -137,7 +159,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => onSelectView(item.id)}
                   className={`flex items-center space-x-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all relative ${
                     isActive
-                      ? currentSubject === 'zoology'
+                      ? currentSubject === 'physics'
+                        ? 'bg-violet-50 text-violet-800 shadow-xs border border-violet-200/80 font-bold'
+                        : currentSubject === 'zoology'
                         ? 'bg-cyan-50 text-cyan-800 shadow-xs border border-cyan-200/80 font-bold'
                         : 'bg-emerald-50 text-emerald-800 shadow-xs border border-emerald-200/80 font-bold'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
@@ -193,28 +217,39 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Mobile Subject Switcher Bar */}
-        <div className="lg:hidden py-2 border-t border-slate-100 flex items-center justify-center gap-2">
+        <div className="lg:hidden py-2 border-t border-slate-100 grid grid-cols-3 gap-1.5">
+          <button
+            onClick={() => onSelectSubject('physics')}
+            className={`flex items-center justify-center space-x-1 py-1.5 px-2 rounded-lg text-[11px] font-bold transition-all ${
+              currentSubject === 'physics'
+                ? 'bg-violet-600 text-white shadow-xs'
+                : 'bg-slate-100 text-slate-700'
+            }`}
+          >
+            <Atom className="w-3 h-3 shrink-0" />
+            <span className="truncate">পদার্থ (৩৩২)</span>
+          </button>
           <button
             onClick={() => onSelectSubject('zoology')}
-            className={`flex-1 flex items-center justify-center space-x-1.5 py-1.5 px-3 rounded-lg text-xs font-bold transition-all ${
+            className={`flex items-center justify-center space-x-1 py-1.5 px-2 rounded-lg text-[11px] font-bold transition-all ${
               currentSubject === 'zoology'
                 ? 'bg-cyan-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-700'
             }`}
           >
-            <Dna className="w-3.5 h-3.5" />
-            <span>প্রাণিবিজ্ঞান (১,৩৪৬)</span>
+            <Dna className="w-3 h-3 shrink-0" />
+            <span className="truncate">প্রাণী (১,৩৪৬)</span>
           </button>
           <button
             onClick={() => onSelectSubject('botany')}
-            className={`flex-1 flex items-center justify-center space-x-1.5 py-1.5 px-3 rounded-lg text-xs font-bold transition-all ${
+            className={`flex items-center justify-center space-x-1 py-1.5 px-2 rounded-lg text-[11px] font-bold transition-all ${
               currentSubject === 'botany'
                 ? 'bg-emerald-600 text-white shadow-xs'
                 : 'bg-slate-100 text-slate-700'
             }`}
           >
-            <Sprout className="w-3.5 h-3.5" />
-            <span>উদ্ভিদবিজ্ঞান (১,৭২২)</span>
+            <Sprout className="w-3 h-3 shrink-0" />
+            <span className="truncate">উদ্ভিদ (১,৭২২)</span>
           </button>
         </div>
 

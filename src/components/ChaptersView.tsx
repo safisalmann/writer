@@ -10,12 +10,14 @@ import {
   RotateCcw,
   Sprout,
   Dna,
+  Atom,
   Clock,
   Sparkles,
   Award
 } from 'lucide-react';
 import { CHAPTERS as BOTANY_CHAPTERS } from '../data/chapters';
 import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
+import { PHYSICS_CHAPTERS } from '../data/physics_chapters';
 import { generateChapterSets } from '../data/questions';
 import { Chapter, PracticeSessionConfig, MCQSet, Subject } from '../types';
 
@@ -43,8 +45,10 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
 }) => {
   const [expandedChapterId, setExpandedChapterId] = useState<number | null>(null);
 
-  const chapters = currentSubject === 'zoology' ? ZOOLOGY_CHAPTERS : BOTANY_CHAPTERS;
+  const isPhysics = currentSubject === 'physics';
   const isZoology = currentSubject === 'zoology';
+  const chapters = isPhysics ? PHYSICS_CHAPTERS : isZoology ? ZOOLOGY_CHAPTERS : BOTANY_CHAPTERS;
+  const subjectName = isPhysics ? 'পদার্থবিজ্ঞান' : isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান';
 
   const toggleExpand = (id: number) => {
     setExpandedChapterId(prev => prev === id ? null : id);
@@ -56,20 +60,20 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
       subject: currentSubject,
       chapterId: ch.id,
       setId: set.id,
-      title: `${isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}: ${set.title}`,
+      title: `${subjectName}: ${set.title}`,
       subtitle: set.description,
       questionIds: set.questionIds
     });
   };
 
   const handleStartFullChapter = (ch: Chapter) => {
-    const prefix = isZoology ? `zoo_ch${ch.id}_` : `ch${ch.id}_`;
+    const prefix = isPhysics ? `phy_ch${ch.id}_` : isZoology ? `zoo_ch${ch.id}_` : `ch${ch.id}_`;
     const qIds = Array.from({ length: ch.totalQuestions }, (_, i) => `${prefix}${i + 1}`);
     onStartSession({
       mode: 'practice',
       subject: currentSubject,
       chapterId: ch.id,
-      title: `${isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}: ${ch.nameBangla} - সম্পূর্ণ অধ্যায়`,
+      title: `${subjectName}: ${ch.nameBangla} - সম্পূর্ণ অধ্যায়`,
       subtitle: `প্রশ্ন ১ থেকে ${ch.totalQuestions} ক্রমানুসারে (সঠিক উত্তর কী যাচাই)`,
       questionIds: qIds
     });
@@ -82,18 +86,24 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold mb-2 ${
-              isZoology ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+              isPhysics 
+                ? 'bg-violet-50 text-violet-800 border border-violet-200' 
+                : isZoology 
+                ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' 
+                : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
             }`}>
-              {isZoology ? <Dna className="w-3.5 h-3.5" /> : <Sprout className="w-3.5 h-3.5" />}
+              {isPhysics ? <Atom className="w-3.5 h-3.5" /> : isZoology ? <Dna className="w-3.5 h-3.5" /> : <Sprout className="w-3.5 h-3.5" />}
               <span>
-                {isZoology ? 'জীববিজ্ঞান ২য় পত্র • প্রাণিবিজ্ঞান (Zoology)' : 'জীববিজ্ঞান ১ম পত্র • উদ্ভিদবিজ্ঞান (Botany)'}
+                {isPhysics ? 'পদার্থবিজ্ঞান ২য় পত্র • অধ্যায় ০৪ ও ০৫' : isZoology ? 'জীববিজ্ঞান ২য় পত্র • প্রাণিবিজ্ঞান (Zoology)' : 'জীববিজ্ঞান ১ম পত্র • উদ্ভিদবিজ্ঞান (Botany)'}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
-              ১২টি অধ্যায় ভিত্তিক প্রশ্নব্যাংক
+              {isPhysics ? 'পদার্থবিজ্ঞান ২য় পত্র: অধ্যায় ভিত্তিক প্রশ্নব্যাংক' : '১২টি অধ্যায় ভিত্তিক প্রশ্নব্যাংক'}
             </h1>
             <p className="text-sm text-slate-500 mt-1 font-medium">
-              {isZoology ? (
+              {isPhysics ? (
+                <>অধ্যায় ০৪ (২৪৩ MCQ) এবং অধ্যায় ০৫ (৮৯ MCQ) এর মোট <strong>৩৩২টি</strong> প্রশ্ন সঠিক উত্তর চাবি ও ব্যাখ্যাসহ প্রস্তুত।</>
+              ) : isZoology ? (
                 <>প্রাণিবিজ্ঞানের ১২টি অধ্যায়ে <strong>১,৩৪৬টি</strong> মানসম্মত MCQ প্রশ্ন সঠিক উত্তর চাবিসহ প্রস্তুত। মেডিকেল ও এইচএসসি পরীক্ষার জন্য আদর্শ।</>
               ) : (
                 <>উদ্ভিদবিজ্ঞানের ১২টি অধ্যায়ে <strong>১,৭২২টি</strong> মানসম্মত MCQ প্রশ্ন সঠিক উত্তর চাবিসহ প্রস্তুত।</>
@@ -104,6 +114,23 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
 
         {/* Subject Navigation Tabs */}
         <div className="mt-6 pt-5 border-t border-slate-100 flex flex-wrap gap-2">
+          <button
+            onClick={() => onSelectSubject('physics')}
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              isPhysics
+                ? 'bg-violet-600 text-white shadow-md shadow-violet-600/30'
+                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80'
+            }`}
+          >
+            <Atom className="w-4 h-4" />
+            <span>পদার্থ ২য় পত্র (Physics)</span>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full font-black ${
+              isPhysics ? 'bg-white/20 text-white' : 'bg-violet-100 text-violet-800'
+            }`}>
+              ২ অধ্যায় • ৩৩২ MCQ
+            </span>
+          </button>
+
           <button
             onClick={() => onSelectSubject('zoology')}
             className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
@@ -124,7 +151,7 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
           <button
             onClick={() => onSelectSubject('botany')}
             className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-              !isZoology
+              !isZoology && !isPhysics
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30'
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80'
             }`}
@@ -132,7 +159,7 @@ export const ChaptersView: React.FC<ChaptersViewProps> = ({
             <Sprout className="w-4 h-4" />
             <span>উদ্ভিদবিজ্ঞান (Botany)</span>
             <span className={`text-[10px] px-2 py-0.5 rounded-full font-black ${
-              !isZoology ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800'
+              !isZoology && !isPhysics ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800'
             }`}>
               ১২ অধ্যায় • ১,৭২২ MCQ
             </span>

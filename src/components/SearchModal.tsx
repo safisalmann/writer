@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { Search, X, ChevronRight, Bookmark, CheckCircle2, Dna, Sprout } from 'lucide-react';
+import { Search, X, ChevronRight, Bookmark, CheckCircle2, Dna, Sprout, Atom } from 'lucide-react';
 import { searchQuestions } from '../data/questions';
 import { CHAPTERS as BOTANY_CHAPTERS } from '../data/chapters';
 import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
+import { PHYSICS_CHAPTERS } from '../data/physics_chapters';
 import { Question, Subject } from '../types';
 
 interface SearchModalProps {
@@ -30,7 +31,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   if (!isOpen) return null;
 
-  const currentChapters = subjectFilter === 'zoology' 
+  const currentChapters = subjectFilter === 'physics'
+    ? PHYSICS_CHAPTERS
+    : subjectFilter === 'zoology' 
     ? ZOOLOGY_CHAPTERS 
     : subjectFilter === 'botany' 
       ? BOTANY_CHAPTERS 
@@ -82,7 +85,21 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 : 'bg-white text-slate-600 hover:bg-slate-200'
             }`}
           >
-            উভয় বিষয় (৩,০৬৮ MCQ)
+            সকল বিষয় (৩,৪০০ MCQ)
+          </button>
+          <button
+            onClick={() => {
+              setSubjectFilter('physics');
+              setSelectedChapterId(undefined);
+            }}
+            className={`px-2.5 py-1 rounded-full whitespace-nowrap font-medium transition-colors flex items-center space-x-1 cursor-pointer ${
+              subjectFilter === 'physics'
+                ? 'bg-violet-600 text-white font-bold'
+                : 'bg-white text-slate-600 hover:bg-slate-200'
+            }`}
+          >
+            <Atom className="w-3 h-3" />
+            <span>পদার্থবিজ্ঞান (৩৩২)</span>
           </button>
           <button
             onClick={() => {
@@ -137,8 +154,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {query.trim() === '' ? (
             <div className="py-12 text-center text-slate-400">
               <Search className="w-10 h-10 mx-auto mb-2 opacity-30 text-emerald-500" />
-              <p className="text-sm font-medium">যেকোনো প্রশ্ন বা বৈজ্ঞানিক শব্দ লিখে খুঁজুন</p>
-              <p className="text-xs text-slate-400 mt-1">প্রাণিবিজ্ঞান ও উদ্ভিদবিজ্ঞানের মোট ৩,০৬৮টি প্রশ্ন ডাটাবেজে উপলব্ধ</p>
+              <p className="text-sm font-medium">যেকোনো প্রশ্ন, বিষয় বা বৈজ্ঞানিক শব্দ লিখে খুঁজুন</p>
+              <p className="text-xs text-slate-400 mt-1">পদার্থবিজ্ঞান, প্রাণিবিজ্ঞান ও উদ্ভিদবিজ্ঞানের মোট ৩,৪০০টি প্রশ্ন উপলব্ধ</p>
             </div>
           ) : results.length === 0 ? (
             <div className="py-12 text-center text-slate-500">
@@ -147,8 +164,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             </div>
           ) : (
             results.map(q => {
+              const isPhy = q.id.startsWith('phy_') || q.subject === 'physics';
               const isZoo = q.id.startsWith('zoo_') || q.subject === 'zoology';
-              const ch = isZoo 
+              const ch = isPhy
+                ? PHYSICS_CHAPTERS.find(c => c.id === q.chapterId)
+                : isZoo 
                 ? ZOOLOGY_CHAPTERS.find(c => c.id === q.chapterId) 
                 : BOTANY_CHAPTERS.find(c => c.id === q.chapterId);
               const isSaved = isQuestionSaved(q.id);
@@ -165,15 +185,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center space-x-2 text-[11px]">
                       <span className={`px-1.5 py-0.2 rounded font-bold ${
-                        isZoo ? 'bg-cyan-100 text-cyan-900' : 'bg-emerald-100 text-emerald-900'
+                        isPhy 
+                          ? 'bg-violet-100 text-violet-900' 
+                          : isZoo 
+                          ? 'bg-cyan-100 text-cyan-900' 
+                          : 'bg-emerald-100 text-emerald-900'
                       }`}>
-                        {isZoo ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}
+                        {isPhy ? 'পদার্থবিজ্ঞান' : isZoo ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}
                       </span>
                       <span className="font-bold text-slate-700 bg-slate-100 px-1.5 py-0.2 rounded">
                         অধ্যায় {q.chapterId}: {ch?.nameBangla}
                       </span>
                       {q.topic && (
-                        <span className="text-slate-400">
+                        <span className="text-slate-400 truncate max-w-xs">
                           • {q.topic}
                         </span>
                       )}
@@ -188,6 +212,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       <span className="text-emerald-600 mr-1.5 font-bold">#{q.number}</span>
                       {q.question}
                     </h4>
+
+                    {q.explanation && (
+                      <p className="text-[11px] text-sky-800 bg-sky-50/90 border border-sky-100 px-2 py-0.5 rounded-md line-clamp-1 font-medium mt-1">
+                        💡 ব্যাখ্যা: {q.explanation}
+                      </p>
+                    )}
                   </div>
 
                   <div className="flex items-center space-x-2 shrink-0 self-center">

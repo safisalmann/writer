@@ -1,16 +1,17 @@
 export type OptionIndex = 0 | 1 | 2 | 3;
-export type Subject = 'zoology' | 'botany';
+export type Subject = 'zoology' | 'botany' | 'physics';
 
 export interface Question {
-  id: string; // e.g. "ch1_1" or "zoo_ch1_1"
-  chapterId: number; // 1 to 12
+  id: string; // e.g. "ch1_1" or "zoo_ch1_1" or "phy_ch4_1"
+  chapterId: number;
   number: number;
   question: string;
-  options: [string, string, string, string]; // [ক, খ, গ, ঘ]
-  correctAnswer: OptionIndex; // 0 for ক, 1 for খ, 2 for গ, 3 for ঘ
+  options: [string, string, string, string] | string[]; // [ক, খ, গ, ঘ]
+  correctAnswer: OptionIndex | number; // 0 for ক, 1 for খ, 2 for গ, 3 for ঘ
   topic?: string;
   source?: string;
   subject?: Subject;
+  explanation?: string;
 }
 
 export interface MCQSet {

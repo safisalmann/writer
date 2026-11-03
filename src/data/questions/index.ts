@@ -1,6 +1,7 @@
 import { Question, MCQSet, Subject, Chapter } from '../../types';
 import { CHAPTERS as BOTANY_CHAPTERS } from '../chapters';
 import { ZOOLOGY_CHAPTERS } from '../zoology_chapters';
+import { PHYSICS_CHAPTERS } from '../physics_chapters';
 
 // Botany Questions (Ch 1 - 12)
 import { CHAPTER_1_QUESTIONS } from './ch1';
@@ -29,6 +30,12 @@ import { ZOOLOGY_CHAPTER_9_QUESTIONS } from './zoology/zoo_ch9';
 import { ZOOLOGY_CHAPTER_10_QUESTIONS } from './zoology/zoo_ch10';
 import { ZOOLOGY_CHAPTER_11_QUESTIONS } from './zoology/zoo_ch11';
 import { ZOOLOGY_CHAPTER_12_QUESTIONS } from './zoology/zoo_ch12';
+
+// Physics Questions (Ch 4 & Ch 5)
+import { PHYSICS_CHAPTER_4_QUESTIONS } from './physics/phy_ch4';
+import { PHYSICS_CHAPTER_5_QUESTIONS } from './physics/phy_ch5';
+
+export { PHYSICS_CHAPTER_4_QUESTIONS, PHYSICS_CHAPTER_5_QUESTIONS };
 
 export const BOTANY_QUESTIONS: Question[] = [
   ...CHAPTER_1_QUESTIONS,
@@ -60,9 +67,15 @@ export const ZOOLOGY_QUESTIONS: Question[] = [
   ...ZOOLOGY_CHAPTER_12_QUESTIONS
 ].map(q => ({ ...q, subject: 'zoology' as Subject }));
 
+export const PHYSICS_QUESTIONS: Question[] = [
+  ...PHYSICS_CHAPTER_4_QUESTIONS,
+  ...PHYSICS_CHAPTER_5_QUESTIONS
+].map(q => ({ ...q, subject: 'physics' as Subject }));
+
 export const ALL_QUESTIONS: Question[] = [
   ...ZOOLOGY_QUESTIONS,
-  ...BOTANY_QUESTIONS
+  ...BOTANY_QUESTIONS,
+  ...PHYSICS_QUESTIONS
 ];
 
 export const BOTANY_QUESTIONS_BY_CHAPTER: Record<number, Question[]> = {
@@ -95,18 +108,29 @@ export const ZOOLOGY_QUESTIONS_BY_CHAPTER: Record<number, Question[]> = {
   12: ZOOLOGY_CHAPTER_12_QUESTIONS
 };
 
+export const PHYSICS_QUESTIONS_BY_CHAPTER: Record<number, Question[]> = {
+  4: PHYSICS_CHAPTER_4_QUESTIONS,
+  5: PHYSICS_CHAPTER_5_QUESTIONS
+};
+
 export const QUESTIONS_BY_CHAPTER = ZOOLOGY_QUESTIONS_BY_CHAPTER;
 
 export function getChaptersForSubject(subject: Subject): Chapter[] {
-  return subject === 'zoology' ? ZOOLOGY_CHAPTERS : BOTANY_CHAPTERS;
+  if (subject === 'physics') return PHYSICS_CHAPTERS;
+  if (subject === 'botany') return BOTANY_CHAPTERS;
+  return ZOOLOGY_CHAPTERS;
 }
 
 export function getQuestionsForSubject(subject: Subject): Question[] {
-  return subject === 'zoology' ? ZOOLOGY_QUESTIONS : BOTANY_QUESTIONS;
+  if (subject === 'physics') return PHYSICS_QUESTIONS;
+  if (subject === 'botany') return BOTANY_QUESTIONS;
+  return ZOOLOGY_QUESTIONS;
 }
 
 export function getQuestionsByChapterForSubject(subject: Subject): Record<number, Question[]> {
-  return subject === 'zoology' ? ZOOLOGY_QUESTIONS_BY_CHAPTER : BOTANY_QUESTIONS_BY_CHAPTER;
+  if (subject === 'physics') return PHYSICS_QUESTIONS_BY_CHAPTER;
+  if (subject === 'botany') return BOTANY_QUESTIONS_BY_CHAPTER;
+  return ZOOLOGY_QUESTIONS_BY_CHAPTER;
 }
 
 // Generate sequential practice sets for each chapter (~25 questions per set)
@@ -144,7 +168,7 @@ export function generateChapterSets(chapterId: number, subject: Subject = 'zoolo
   return sets;
 }
 
-// Generate all sequential sets across all 12 chapters for a given subject
+// Generate all sequential sets across all chapters for a given subject
 export function getAllMCQSets(subject: Subject = 'zoology'): MCQSet[] {
   const chapters = getChaptersForSubject(subject);
   return chapters.flatMap(ch => generateChapterSets(ch.id, subject));
@@ -178,6 +202,7 @@ export function searchQuestions(query: string, chapterId?: number, subject?: Sub
       item.options.some(opt => opt.toLowerCase().includes(q)) ||
       (item.topic && item.topic.toLowerCase().includes(q)) ||
       (item.source && item.source.toLowerCase().includes(q)) ||
+      (item.explanation && item.explanation.toLowerCase().includes(q)) ||
       item.number.toString() === q
     );
   });

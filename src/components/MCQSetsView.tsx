@@ -9,7 +9,8 @@ import {
   Award,
   BookOpen,
   Dna,
-  Sprout
+  Sprout,
+  Atom
 } from 'lucide-react';
 import { CHAPTERS as BOTANY_CHAPTERS } from '../data/chapters';
 import { ZOOLOGY_CHAPTERS } from '../data/zoology_chapters';
@@ -32,7 +33,9 @@ export const MCQSetsView: React.FC<MCQSetsViewProps> = ({
   const [selectedChapterId, setSelectedChapterId] = useState<number | 'all'>('all');
   const [statusFilter, setStatusFilter] = useState<'all' | 'completed' | 'pending'>('all');
 
+  const isPhysics = currentSubject === 'physics';
   const isZoology = currentSubject === 'zoology';
+  const subjectName = isPhysics ? 'পদার্থবিজ্ঞান' : isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান';
   const chapters = getChaptersForSubject(currentSubject);
   const allSubjectSets = useMemo(() => getAllMCQSets(currentSubject), [currentSubject]);
 
@@ -61,7 +64,7 @@ export const MCQSetsView: React.FC<MCQSetsViewProps> = ({
       subject: currentSubject,
       chapterId: set.chapterId,
       setId: set.id,
-      title: `${isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}: ${set.title}`,
+      title: `${subjectName}: ${set.title}`,
       subtitle: set.description,
       questionIds: set.questionIds
     });
@@ -73,16 +76,22 @@ export const MCQSetsView: React.FC<MCQSetsViewProps> = ({
       <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold mb-2 ${
-            isZoology ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+            isPhysics
+              ? 'bg-violet-50 text-violet-800 border border-violet-200'
+              : isZoology 
+              ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' 
+              : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
           }`}>
             <Layers className="w-3.5 h-3.5" />
-            <span>{isZoology ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'} ধারাবাহিক সিরিজ</span>
+            <span>{subjectName} ধারাবাহিক সিরিজ</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
             MCQ অনুশীলন সেটস
           </h1>
           <p className="text-sm text-slate-500 mt-1 font-medium">
-            {isZoology ? (
+            {isPhysics ? (
+              <>পদার্থবিজ্ঞান ২য় পত্রের অধ্যায় ৪ ও ৫ এর <strong>{allSubjectSets.length}টি</strong> ধারাবাহিক সেট (প্রতিটিতে ~২৫টি প্রশ্ন)।</>
+            ) : isZoology ? (
               <>প্রাণিবিজ্ঞানের ১২টি অধ্যায়ের <strong>{allSubjectSets.length}টি</strong> ধারাবাহিক সেট (প্রতিটিতে ~২৫টি প্রশ্ন)।</>
             ) : (
               <>উদ্ভিদবিজ্ঞানের ১২টি অধ্যায়ের <strong>{allSubjectSets.length}টি</strong> ধারাবাহিক সেট (প্রতিটিতে ~২৫টি প্রশ্ন)।</>
@@ -91,6 +100,20 @@ export const MCQSetsView: React.FC<MCQSetsViewProps> = ({
 
           {/* Subject Navigation Tabs */}
           <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              onClick={() => {
+                onSelectSubject('physics');
+                setSelectedChapterId('all');
+              }}
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                isPhysics
+                  ? 'bg-violet-600 text-white shadow-sm'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              <Atom className="w-3.5 h-3.5" />
+              <span>পদার্থবিজ্ঞান সেটস (১৪ সেট)</span>
+            </button>
             <button
               onClick={() => {
                 onSelectSubject('zoology');
@@ -111,7 +134,7 @@ export const MCQSetsView: React.FC<MCQSetsViewProps> = ({
                 setSelectedChapterId('all');
               }}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                !isZoology
+                !isZoology && !isPhysics
                   ? 'bg-emerald-600 text-white shadow-sm'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
@@ -124,16 +147,16 @@ export const MCQSetsView: React.FC<MCQSetsViewProps> = ({
 
         {/* Quick summary badge */}
         <div className={`flex items-center space-x-3 p-3.5 rounded-2xl border shrink-0 ${
-          isZoology ? 'bg-cyan-50/80 border-cyan-100' : 'bg-emerald-50/80 border-emerald-100'
+          isPhysics ? 'bg-violet-50/80 border-violet-100' : isZoology ? 'bg-cyan-50/80 border-cyan-100' : 'bg-emerald-50/80 border-emerald-100'
         }`}>
           <div className={`w-10 h-10 rounded-xl text-white flex items-center justify-center font-black ${
-            isZoology ? 'bg-cyan-600' : 'bg-emerald-600'
+            isPhysics ? 'bg-violet-600' : isZoology ? 'bg-cyan-600' : 'bg-emerald-600'
           }`}>
             <Award className="w-5 h-5" />
           </div>
           <div>
             <div className="text-xs font-bold text-slate-500">সেট সমাধান অগ্রগতি</div>
-            <div className={`text-lg font-extrabold ${isZoology ? 'text-cyan-900' : 'text-emerald-900'}`}>
+            <div className={`text-lg font-extrabold ${isPhysics ? 'text-violet-900' : isZoology ? 'text-cyan-900' : 'text-emerald-900'}`}>
               {completedCount} / {allSubjectSets.length} টি
             </div>
           </div>

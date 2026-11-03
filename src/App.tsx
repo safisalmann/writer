@@ -11,9 +11,10 @@ import { PracticeSession } from './components/PracticeSession';
 import { SearchModal } from './components/SearchModal';
 import { CHAPTERS } from './data/chapters';
 import { ZOOLOGY_CHAPTERS } from './data/zoology_chapters';
+import { PHYSICS_CHAPTERS } from './data/physics_chapters';
 
 export default function App() {
-  const [currentSubject, setCurrentSubject] = useState<Subject>('zoology');
+  const [currentSubject, setCurrentSubject] = useState<Subject>('physics');
   const [currentView, setCurrentView] = useState<ViewMode>('dashboard');
   const [previousView, setPreviousView] = useState<ViewMode>('dashboard');
   const [activeSession, setActiveSession] = useState<PracticeSessionConfig | null>(null);
@@ -51,14 +52,17 @@ export default function App() {
   };
 
   const handleSelectQuestionFromSearch = (q: Question) => {
+    const isPhy = q.id.startsWith('phy_') || q.subject === 'physics';
     const isZoo = q.id.startsWith('zoo_') || q.subject === 'zoology';
-    const chList = isZoo ? ZOOLOGY_CHAPTERS : CHAPTERS;
+    const chList = isPhy ? PHYSICS_CHAPTERS : isZoo ? ZOOLOGY_CHAPTERS : CHAPTERS;
     const ch = chList.find(c => c.id === q.chapterId);
+    const subj: Subject = isPhy ? 'physics' : isZoo ? 'zoology' : 'botany';
+    const subjName = isPhy ? 'পদার্থবিজ্ঞান' : isZoo ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান';
     handleStartSession({
       mode: 'practice',
-      subject: isZoo ? 'zoology' : 'botany',
+      subject: subj,
       chapterId: q.chapterId,
-      title: `${isZoo ? 'প্রাণিবিজ্ঞান' : 'উদ্ভিদবিজ্ঞান'}: ${ch?.nameBangla || 'অধ্যায়'} - প্রশ্ন ${q.number}`,
+      title: `${subjName}: ${ch?.nameBangla || 'অধ্যায়'} - প্রশ্ন ${q.number}`,
       subtitle: q.topic || 'অনুশীলন সেশন',
       questionIds: [q.id]
     });
